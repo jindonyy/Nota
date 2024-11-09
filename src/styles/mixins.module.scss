@@ -1,0 +1,19 @@
+@mixin position($pos: absolute, $t: 0, $b: auto, $l: 0, $r: auto) {
+    position: $pos;
+    inset: $t $r $b $l;
+}
+
+@mixin flex($justify: center, $align: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin ellipsis($lines: 1) {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+    word-break: break-word;
+    white-space: pre-line;
+}

@@ -1,28 +1,23 @@
-:root {
-    --background: #ffffff;
-    --foreground: #171717;
-}
+@import './variables.module';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: #0a0a0a;
-        --foreground: #ededed;
+@layer base {
+    html {
+        min-height: 100%;
+        overscroll-behavior: auto;
+        line-height: normal;
     }
-}
 
-html {
-    min-height: 100%;
-    overscroll-behavior: auto;
-    line-height: normal;
-}
-
-body {
-    overflow: auto;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-    color: var(--foreground);
-    background: var(--background);
-    overscroll-behavior: auto;
-    word-break: keep-all;
+    body {
+        overflow: auto;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        color: $primary-light;
+        background: $primary-dark;
+        overscroll-behavior: auto;
+        word-break: keep-all;
+    }
 }
