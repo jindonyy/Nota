@@ -1,5 +1,5 @@
 /** @type {import('prettier').Config} */
-export default {
+module.exports = {
     // 코드 라인 끝에 세미콜론 추가
     semi: true,
     // 문자열을 작은따옴표로 표기

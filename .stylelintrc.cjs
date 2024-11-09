@@ -1,5 +1,5 @@
 /** @type {import('stylelint').Config} */
-export default {
+module.exports = {
     extends: ['stylelint-config-standard-scss', 'stylelint-config-recess-order'],
     rules: {
         // 동일한 블록 안에서 중복된 속성 선언을 허용하지 않음

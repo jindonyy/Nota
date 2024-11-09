@@ -1,7 +1,7 @@
 /** @type {import('eslint').Linter.Config} */
-import path from 'path';
+const path = require('path');
 
-export default {
+module.exports = {
     root: true,
     extends: ['plugin:@typescript-eslint/recommended', 'next/core-web-vitals', 'prettier'],
     plugins: ['no-relative-import-paths', 'unused-imports', '@typescript-eslint'],
@@ -13,7 +13,15 @@ export default {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    settings: { next: './' },
+    settings: {
+        next: './',
+        'import/parsers': {
+            '@typescript-eslint/parser': ['.ts', '.tsx', '.js', '.jsx'],
+        },
+        'import/resolver': {
+            typescript: './tsconfig.json',
+        },
+    },
     rules: {
         // 사용하지 않는 변수가 있을 시 경고
         'no-unused-vars': 'off',
