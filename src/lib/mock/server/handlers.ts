@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
 import { randomUUID } from 'crypto';
-import { CHAT_MODELS, CHATS } from './data';
+
+import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
+import type { Request, Response } from 'express';
 
 let chatData = CHATS;
 const chatModels = CHAT_MODELS;
@@ -21,7 +22,7 @@ export const getChats = (req: Request, res: Response) => {
 };
 
 // 채팅생성
-export const creatChat = (req: Request<unknown, unknown, { chat_model_id: string }>, res: Response) => {
+export const createChat = (req: Request<unknown, unknown, { chat_model_id: string }>, res: Response) => {
     const { chat_model_id } = req.body;
 
     chatData.push({

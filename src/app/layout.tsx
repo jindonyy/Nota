@@ -1,6 +1,6 @@
+import Providers from '@/providers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -23,13 +23,11 @@ export default function RootLayout({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    // 예시 코드입니다. (지우셔도 무방합니다.)
-    fetch(`${process.env.NEXT_PUBLIC_MOCK_API_URL}/test`)
-        .then((res) => res.json())
-        .then((res) => console.log(res));
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>{children}</body>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+                <Providers>{children}</Providers>
+            </body>
         </html>
     );
 }

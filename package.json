@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "concurrently \"npx tsx watch ./src/lib/mock/http.ts\" \"next dev\"",
+        "dev": "concurrently \"npx tsx watch ./src/lib/mock/server/server.ts\" \"next dev\"",
         "build": "next build",
         "start": "next start",
         "lint": "eslint --ext .ts,.tsx .",
@@ -14,9 +14,11 @@
     "dependencies": {
         "next": "14.2.15",
         "react": "^18",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "uuid": "^11.0.2"
     },
     "devDependencies": {
+        "@mswjs/http-middleware": "^0.10.2",
         "@types/cors": "^2.8.17",
         "@types/express": "^5.0.0",
         "@types/node": "^20",
@@ -37,6 +39,7 @@
         "eslint-plugin-no-relative-import-paths": "^1.5.5",
         "eslint-plugin-unused-imports": "^4.1.4",
         "express": "^4.21.1",
+        "msw": "^2.6.2",
         "postcss": "^8",
         "postcss-dvh": "^1.1.0",
         "postcss-flexbugs-fixes": "^5.0.2",
