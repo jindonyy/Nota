@@ -9113,6 +9113,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-loader@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "node-loader@npm:2.0.0"
+  dependencies:
+    loader-utils: "npm:^2.0.0"
+  peerDependencies:
+    webpack: ^5.0.0
+  checksum: 10c0/ceacf34ccb05c5efe7fbed2224dfa42ec9dd8e5bd70e9dc90bb618ee6372cc1ff54edc60d1d71f4ff52c4b4db0ac410caa6ae74d90bbc68b88a70bba5f75c727
+  languageName: node
+  linkType: hard
+
 "node-polyfill-webpack-plugin@npm:^2.0.1":
   version: 2.0.1
   resolution: "node-polyfill-webpack-plugin@npm:2.0.1"
@@ -9216,6 +9227,7 @@ __metadata:
     express: "npm:^4.21.1"
     msw: "npm:^2.6.2"
     next: "npm:14.2.15"
+    node-loader: "npm:^2.0.0"
     postcss: "npm:^8"
     postcss-dvh: "npm:^1.1.0"
     postcss-flexbugs-fixes: "npm:^5.0.2"

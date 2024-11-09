@@ -3,6 +3,7 @@ const config = {
     plugins: {
         'postcss-dvh': {},
         'postcss-import': {},
+        tailwindcss: {},
         'postcss-flexbugs-fixes': {},
         autoprefixer: {},
         'postcss-preset-env': {
