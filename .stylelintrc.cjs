@@ -4,18 +4,14 @@ module.exports = {
     rules: {
         // 동일한 블록 안에서 중복된 속성 선언을 허용하지 않음
         'declaration-block-no-duplicate-properties': true,
-        // 알 수 없는 @ 규칙 사용을 금지 (아래 SCSS에서 일부 규칙을 예외로 허용하기 위해 null로 설정)
-        'at-rule-no-unknown': null,
-        // SCSS에서 알려지지 않은 @ 규칙 사용을 금지하고, tailwind 관련 규칙은 예외로 설정
-        'scss/at-rule-no-unknown': [true, { ignoreAtRules: ['tailwind'] }],
         // 16진수 색상 값은 항상 긴 형식으로 사용 (ex: #ffffff)
         'color-hex-length': 'long',
         // 색상 함수 표기법 (modern: rgb(0 0 0 / 0.5), legacy: rgba(0, 0, 0, 0.5))
         'color-function-notation': 'modern',
-        // 알파 값 표기법 (modern: 0.5, legacy: 50%)
-        'alpha-value-notation': 'modern',
-        // 길이가 0일 때 단위 사용 금지 (modern: 0, legacy: '0px')
-        'length-zero-no-unit': 'modern',
+        // 알파 값 숫자로만 표기 (ex: opacity: 0.5)
+        'alpha-value-notation': 'number',
+        // 길이가 0일 때 단위 사용 금지
+        'length-zero-no-unit': true,
         // class 이름 케밥 케이스 문자열만 허용
         'selector-class-pattern': '^[a-z-]+$',
         // 애니메이션 keyframe 이름 케밥 케이스 문자열만 허용

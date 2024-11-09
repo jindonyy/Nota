@@ -5,9 +5,14 @@
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.quickSuggestions": {
+        "strings": true
+    },
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "eslint.debug": true,
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
         "source.fixAll.stylelint": "explicit"
