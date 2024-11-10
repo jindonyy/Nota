@@ -1,0 +1,16 @@
+@use '@/styles/variables.module' as var;
+@use '@/styles/mixins.module';
+
+.chat-input {
+    @include mixins.position(fixed, auto, 50%, 20px, auto);
+    @include mixins.flex(space-between, center, row, 5px);
+
+    width: 100%;
+    max-width: calc(768px - var.$aside-width);
+    margin-right: calc(var.$aside-width / 2 * -1);
+    transform: translateX(50%);
+}
+
+.chat-input-textarea {
+    flex-grow: 1;
+}
