@@ -5,7 +5,6 @@ import type { PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 
 export function MswProvider({ children }: PropsWithChildren) {
-    const onWorkerActive = useWorkerStore(({ onWorkerActive }) => onWorkerActive);
     const [isReady, setIsReady] = useState(false);
 
     const startMockServer = async () => {
@@ -15,13 +14,17 @@ export function MswProvider({ children }: PropsWithChildren) {
             const { worker } = await import('@/lib/mock/browser/worker');
             await worker.start();
             setIsReady(true);
-            onWorkerActive();
         }
     };
 
     useEffect(() => {
         void startMockServer();
     }, []);
+
+    // msw 서버가 준비되기 전에는 로딩 상태를 보여줌
+    if (!isReady) {
+        return <div>{'Loading...'}</div>;
+    }
 
     return <>{children}</>;
 }
