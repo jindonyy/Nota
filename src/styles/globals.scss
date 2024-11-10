@@ -6,6 +6,28 @@
 
 @layer base {
     :root {
+        /** palette */
+        // gray
+        --white: #ffffff;
+        --black: #000000;
+        --gray-50: #f9f9f9;
+        --gray-100: #ececec;
+        --gray-200: #e3e3e3;
+        --gray-300: #cdcdcd;
+        --gray-400: #b4b4b4;
+        --gray-500: #9b9b9b;
+        --gray-600: #676767;
+        --gray-700: #424242;
+        --gray-750: #2f2f2f;
+        --gray-800: #212121;
+        --gray-900: #171717;
+        --gray-950: #0d0d0d;
+
+        // red
+        --red-500: #ef4444;
+        --red-700: #b91c1c;
+
+        /** shadcn */
         --radius: 0.5rem;
         --background: 0 0% 100%;
         --foreground: 224 71.4% 4.1%;
@@ -13,10 +35,10 @@
         --card-foreground: 224 71.4% 4.1%;
         --popover: 0 0% 100%;
         --popover-foreground: 224 71.4% 4.1%;
-        --primary: 220.9 39.3% 11%;
-        --primary-foreground: 210 20% 98%;
-        --secondary: 220 14.3% 95.9%;
-        --secondary-foreground: 220.9 39.3% 11%;
+        --primary: var(--gray-900);
+        --primary-foreground: var(--gray-100);
+        --secondary: var(--gray-100);
+        --secondary-foreground: var(--gray-900);
         --muted: 220 14.3% 95.9%;
         --muted-foreground: 220 8.9% 46.1%;
         --accent: 220 14.3% 95.9%;
