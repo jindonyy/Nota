@@ -2,7 +2,7 @@ import { delay, http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
-import { GetChatResponse } from '@/apis';
+import { GetChatResponse, PostDialoguesRequest } from '@/apis';
 import { Data } from '@/types/data';
 import { Chat } from '@/models/chat';
 
@@ -63,7 +63,7 @@ export const handlers = [
     }),
 
     // 단일 채팅에 대화 추가
-    http.post<{ chatId: string }, { prompt: string }, Data<Chat>, '/chats/:chatId/dialogues'>(
+    http.post<{ chatId: string }, PostDialoguesRequest, Data<Chat>, '/chats/:chatId/dialogues'>(
         '/chats/:chatId/dialogues',
         async ({ params, request }) => {
             await delay(2000);

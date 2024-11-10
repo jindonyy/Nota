@@ -13,4 +13,10 @@
 
 .chat-input-textarea {
     flex-grow: 1;
+
+    & textarea {
+        height: 80px;
+        font-size: 16px;
+        line-height: 1.4;
+    }
 }

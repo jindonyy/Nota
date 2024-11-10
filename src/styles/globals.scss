@@ -74,7 +74,7 @@
         color: var(--primary-foreground);
         background: var(--background);
         overscroll-behavior: auto;
-        word-break: keep-all;
+        word-break: break-word;
     }
 
     li {
