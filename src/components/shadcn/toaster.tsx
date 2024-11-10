@@ -1,6 +1,13 @@
 'use client';
 
-import { Toast, ToastClose, ToastDescription, ToastProvider, ToastTitle, ToastViewport } from '@/components/toast';
+import {
+    Toast,
+    ToastClose,
+    ToastDescription,
+    ToastProvider,
+    ToastTitle,
+    ToastViewport,
+} from '@/components/shadcn/toast';
 import { useToast } from '@/hooks/useToast';
 
 export function Toaster() {
