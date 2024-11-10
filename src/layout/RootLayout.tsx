@@ -9,10 +9,8 @@ export default function RootLayout(props: PropsWithChildren) {
     return (
         <div className="layout">
             <Aside />
-            <div className="layout-right">
-                <Header />
-                {children}
-            </div>
+            <Header />
+            <main className="layout-main">{children}</main>
         </div>
     );
 }

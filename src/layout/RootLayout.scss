@@ -2,10 +2,14 @@
 @use '@/styles/mixins.module';
 
 .layout {
-    @include mixins.flex(space-between);
+    @include mixins.flex(space-between, flex-start);
+
+    position: relative;
 }
 
-.layout-right {
+.layout-main {
+    min-height: 100%;
+    padding-top: var.$header-height;
     padding-left: var.$aside-width;
     flex-grow: 1;
 }

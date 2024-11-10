@@ -1,0 +1,23 @@
+@use '@/styles/variables.module' as var;
+@use '@/styles/mixins.module';
+
+.dialogue-list {
+    @include mixins.flex(flex-start, stretch, column, 20px);
+
+    max-width: calc(768px - var.$aside-width);
+    min-width: calc(667px - var.$aside-width);
+    margin: 0 auto;
+    padding: 20px 15px;
+}
+
+.dialogue-item {
+    @include mixins.flex(space-between, stretch, column, 20px);
+}
+
+.dialogue-prompt {
+    @include mixins.flex(flex-end);
+}
+
+.dialogue-completion {
+    @include mixins.flex(flex-start);
+}
