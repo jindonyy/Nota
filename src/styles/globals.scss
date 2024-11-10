@@ -76,4 +76,8 @@
         overscroll-behavior: auto;
         word-break: keep-all;
     }
+
+    * {
+        @apply border-border;
+    }
 }
