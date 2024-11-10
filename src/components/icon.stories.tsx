@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import IconComponent from '@/components/Icon';
+import Icon from '@/components/Icon';
 
 const meta = {
     title: 'Icon',
-    component: IconComponent,
+    component: Icon,
     parameters: {
         layout: 'centered',
     },
@@ -15,7 +15,7 @@ const meta = {
         color: { control: 'select', options: ['primary', 'secondary'] },
     },
     args: {},
-} satisfies Meta<typeof IconComponent>;
+} satisfies Meta<typeof Icon>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
