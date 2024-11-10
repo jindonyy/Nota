@@ -5,6 +5,7 @@ const config = {
         'postcss-import': {},
         tailwindcss: {},
         'postcss-flexbugs-fixes': {},
+        'tailwindcss/nesting': 'postcss-nesting',
         autoprefixer: {},
         'postcss-preset-env': {
             features: {

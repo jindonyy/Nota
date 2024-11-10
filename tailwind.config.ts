@@ -1,11 +1,10 @@
+/** @type {import('tailwindcss').Config} */
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 
-import variables from '@/styles/variables.module.scss';
-
 const config = {
     darkMode: ['class'],
-    content: ['./src/components/**/*.{ts,tsx}', './src/app/**/*.{ts,tsx}'],
+    content: ['./src/components/**/*.{ts,tsx}', './src/app/*.{ts,tsx}'],
     prefix: '',
     theme: {
         container: {
@@ -13,7 +12,7 @@ const config = {
                 '2xl': '1400px',
             },
         },
-        extend: {
+        extends: {
             colors: {
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
@@ -61,7 +60,6 @@ const config = {
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
             },
-            ...variables,
         },
     },
     plugins: [tailwindcssAnimate],

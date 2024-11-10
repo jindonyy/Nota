@@ -4177,6 +4177,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/tailwindcss@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@types/tailwindcss@npm:3.1.0"
+  dependencies:
+    tailwindcss: "npm:*"
+  checksum: 10c0/7a258e7ce46060fd598669605dabbeef16cf5d13f36bcb1764255837e7b889a4fa6b39a9ffd1c70eed55e0892c5dac079574371cbc343515a2850a088717ab68
+  languageName: node
+  linkType: hard
+
 "@types/tough-cookie@npm:^4.0.5":
   version: 4.0.5
   resolution: "@types/tough-cookie@npm:4.0.5"
@@ -9842,6 +9851,7 @@ __metadata:
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
+    "@types/tailwindcss": "npm:^3.1.0"
     "@typescript-eslint/eslint-plugin": "npm:^8.13.0"
     "@typescript-eslint/parser": "npm:^8.13.0"
     autoprefixer: "npm:^10.4.20"
@@ -9869,6 +9879,7 @@ __metadata:
     postcss-flexbugs-fixes: "npm:^5.0.2"
     postcss-import: "npm:^16.1.0"
     postcss-nested: "npm:^7.0.2"
+    postcss-nesting: "npm:^13.0.1"
     postcss-preset-env: "npm:^10.0.9"
     prettier: "npm:^3.3.3"
     react: "npm:^18"
@@ -12977,7 +12988,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.4.1":
+"tailwindcss@npm:*, tailwindcss@npm:^3.4.1":
   version: 3.4.14
   resolution: "tailwindcss@npm:3.4.14"
   dependencies:
