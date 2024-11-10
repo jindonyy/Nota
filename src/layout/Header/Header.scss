@@ -2,7 +2,7 @@
 @use '@/styles/mixins.module';
 
 .header {
-    @include mixins.position(fixed, 0, auto, var.$aside-width, auto);
+    @include mixins.position(fixed, 0, 0, auto, auto);
     @include mixins.flex(space-between);
 
     width: calc(100% - var.$aside-width);

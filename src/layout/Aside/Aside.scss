@@ -2,7 +2,7 @@
 @use '@/styles/mixins.module';
 
 .aside {
-    @include mixins.position(fixed, 0, var.$aside-width);
+    @include mixins.position(fixed);
 
     flex-shrink: 0;
     overflow: auto;

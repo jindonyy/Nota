@@ -1,9 +1,9 @@
-@mixin position($pos: absolute, $top: 0, $bottom: auto, $left: 0, $right: auto) {
+@mixin position($pos: absolute, $top: 0, $right: auto, $bottom: auto, $left: 0) {
     position: $pos;
     inset: $top $right $bottom $left;
 }
 
-@mixin flex($justify: center, $align: center, $dir: 'row', $gap: '10px') {
+@mixin flex($justify: center, $align: center, $dir: row, $gap: 10px) {
     display: flex;
     justify-content: $justify;
     align-items: $align;
