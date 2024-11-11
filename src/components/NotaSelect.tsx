@@ -24,7 +24,7 @@ export default function NotaSelect(props: Props) {
 
     return (
         <Select defaultValue={defaultValue} onValueChange={onChange}>
-            <SelectTrigger className="select-trigger text-primary-foreground border-0">
+            <SelectTrigger className="select-trigger gap-1 break-all text-primary-foreground border-0">
                 <SelectValue placeholder={placeholder} />
             </SelectTrigger>
             <SelectContent className="select-content bg-primary text-primary-foreground">
