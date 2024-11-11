@@ -17,8 +17,9 @@ const sizes = {
 };
 
 const colors = {
-    primary: 'text-primary',
-    secondary: 'text-secondary',
+    primary: 'text-primary-foreground',
+    secondary: 'text-secondary-foreground',
+    muted: 'text-muted',
 };
 
 interface Props {

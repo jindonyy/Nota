@@ -13,7 +13,7 @@ export default async function Header() {
             <Suspense fallback={DEFAULT_CHAT_MODEL.chat_model_name}>
                 <ChatModel />
             </Suspense>
-            <NotaAvatar fallback={<Icon variant="user" />} />
+            <NotaAvatar fallback={<Icon variant="user" color="secondary" />} />
         </header>
     );
 }
