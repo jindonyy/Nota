@@ -16,7 +16,7 @@ export default function ChatModelSelect(props: Props) {
     const searchParams = useSearchParams();
     const params = new URLSearchParams(searchParams.toString());
     const router = useRouter();
-    const options = getFormattedSelectOption(data.data, 'chat_model_id', 'chat_model_id');
+    const options = getFormattedSelectOption(data.data, 'chat_model_name', 'chat_model_id');
     const currentModel = searchParams.get('model') ?? DEFAULT_CHAT_MODEL.chat_model_id;
 
     const handleSelect = (value: string) => {
