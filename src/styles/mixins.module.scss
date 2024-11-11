@@ -1,12 +1,14 @@
-@mixin position($pos: absolute, $t: 0, $b: auto, $l: 0, $r: auto) {
+@mixin position($pos: absolute, $top: 0, $bottom: auto, $left: 0, $right: auto) {
     position: $pos;
-    inset: $t $r $b $l;
+    inset: $top $right $bottom $left;
 }
 
-@mixin flex($justify: center, $align: center) {
+@mixin flex($justify: center, $align: center, $dir: 'row', $gap: '10px') {
     display: flex;
     justify-content: $justify;
     align-items: $align;
+    flex-direction: $dir;
+    gap: $gap;
 }
 
 @mixin ellipsis($lines: 1) {
