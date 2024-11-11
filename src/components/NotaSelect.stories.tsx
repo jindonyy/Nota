@@ -13,7 +13,6 @@ const meta = {
         label: { control: 'text' },
         defaultValue: { control: 'text' },
         placeholder: { control: 'text' },
-        size: { control: 'select', options: ['default', 'sm', 'lg'] },
     },
     args: {},
 } satisfies Meta<typeof NotaSelect>;
@@ -30,6 +29,5 @@ export const Select: Story = {
         ],
         label: 'fruit',
         placeholder: 'choose fruit',
-        size: 'default',
     },
 };

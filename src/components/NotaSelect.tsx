@@ -1,3 +1,5 @@
+'use client';
+
 import {
     Select,
     SelectContent,
@@ -9,30 +11,23 @@ import {
 } from '@/components/shadcn/select';
 import * as React from 'react';
 
-const sizes = {
-    default: '180px',
-    sm: '150px',
-    lg: '220px',
-};
-
-interface Props<T> {
-    options: (T | { label: string; value: T })[];
-    defaultValue?: T;
+interface Props {
+    options: (string | { label: string; value: string })[];
+    defaultValue?: string;
     label?: string;
     placeholder?: string;
-    size?: keyof typeof sizes;
-    onChange?: () => void;
+    onChange?: React.ComponentProps<typeof Select>['onValueChange'];
 }
 
-export default function NotaSelect<T extends string>(props: Props<T>) {
-    const { options, label, defaultValue, placeholder, size = 'default', onChange } = props;
+export default function NotaSelect(props: Props) {
+    const { options, label, defaultValue, placeholder, onChange } = props;
 
     return (
         <Select defaultValue={defaultValue} onValueChange={onChange}>
-            <SelectTrigger className={`w-[${sizes[size]}]`}>
+            <SelectTrigger className="select-trigger text-primary-foreground border-0">
                 <SelectValue placeholder={placeholder} />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="select-content bg-primary text-primary-foreground">
                 <SelectGroup>
                     {label && <SelectLabel>{label}</SelectLabel>}
                     {options.map((option) => {
@@ -46,7 +41,11 @@ export default function NotaSelect<T extends string>(props: Props<T>) {
                             value = option.value;
                         }
                         return (
-                            <SelectItem key={value} value={value}>
+                            <SelectItem
+                                key={value}
+                                value={value}
+                                className="cursor-pointer focus:bg-primary-focus focus:text-primary-foreground"
+                            >
                                 {label}
                             </SelectItem>
                         );
