@@ -56,6 +56,10 @@
         --chart-5: 340 75% 55%;
     }
 
+    * {
+        @apply border-border;
+    }
+
     html {
         min-height: 100%;
         overscroll-behavior: auto;
@@ -73,7 +77,7 @@
         word-break: keep-all;
     }
 
-    * {
-        @apply border-border;
+    li {
+        list-style: none;
     }
 }

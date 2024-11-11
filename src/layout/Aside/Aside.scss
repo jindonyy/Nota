@@ -1,0 +1,59 @@
+@use '@/styles/variables.module' as var;
+@use '@/styles/mixins.module';
+
+.aside {
+    @include mixins.position(fixed, 0, var.$aside-width);
+
+    flex-shrink: 0;
+    overflow: auto;
+    width: var.$aside-width;
+    background-color: var(--gray-750);
+    height: 100dvh;
+    border-right: 1px solid var(--gray-900);
+}
+
+.aside-header {
+    @include mixins.flex(flex-end);
+
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-700);
+}
+
+.aside-chat-item {
+    & a {
+        display: block;
+        padding: 13px 16px;
+    }
+
+    &-active {
+        background-color: var(--gray-700);
+    }
+}
+
+.aside-chat-item-title {
+    @include mixins.ellipsis(1);
+}
+
+.aside-chat-item-model {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    text-align: right;
+    font-size: 13px;
+    color: var(--gray-400);
+}
+
+.aside-chat-item-skeleton {
+    padding: 13px 16px;
+}
+
+.aside-chat-item-title-skeleton {
+    height: 15px;
+    padding: 2px 0;
+}
+
+.aside-chat-item-model-skeleton {
+    height: 13px;
+    margin-top: 8px;
+    padding: 2px 0;
+}
