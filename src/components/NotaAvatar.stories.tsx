@@ -10,7 +10,7 @@ const meta = {
     },
     tags: ['autodocs'],
     argTypes: {
-        imageSrc: { control: 'text' },
+        imageUrl: { control: 'text' },
         fallback: { control: 'text' },
         size: { control: 'select', options: ['default', 'sm', 'lg'] },
     },
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Avatar: Story = {
     args: {
-        imageSrc: 'https://github.com/shadcn.png',
+        imageUrl: 'https://github.com/shadcn.png',
         fallback: 'user',
         size: 'default',
     },

@@ -1,10 +1,11 @@
 'use client';
 
+import NotaIcon from '@/components/NotaIcon';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/shadcn/avatar';
 import { ReactNode } from 'react';
 
 interface Props {
-    imageSrc?: string;
+    imageUrl?: string;
     fallback?: ReactNode;
     size?: 'default' | 'sm' | 'lg';
 }
@@ -16,12 +17,12 @@ const sizes = {
 };
 
 export default function NotaAvatar(props: Props) {
-    const { imageSrc, fallback, size = 'default' } = props;
+    const { imageUrl, fallback, size = 'default' } = props;
 
     return (
         <Avatar className={sizes[size]}>
-            <AvatarImage src={imageSrc} alt="사용자 프로필" />
-            <AvatarFallback>{fallback}</AvatarFallback>
+            <AvatarImage src={imageUrl} alt="사용자 프로필" />
+            <AvatarFallback>{fallback ?? <NotaIcon variant="user" color="secondary" />}</AvatarFallback>
         </Avatar>
     );
 }
