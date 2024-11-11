@@ -1,21 +1,30 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { delay, http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
+import { Chat } from '@/apis/chat';
+import { Data } from '@/types/data';
 
-let chatData = CHATS;
+const isChats = (data: typeof CHATS): data is Chat[] => {
+    return data.every(
+        (item) =>
+            typeof item.chat_model_id === 'string' &&
+            typeof item.chat_model_name === 'string' &&
+            typeof item.chat_id === 'string' &&
+            Array.isArray(item.dialogues) &&
+            item.dialogues.every(
+                (dialogue) =>
+                    typeof dialogue.dialogue_id === 'string' &&
+                    typeof dialogue.prompt === 'string' &&
+                    typeof dialogue.completion === 'string',
+            ),
+    );
+};
+
+let chatData = isChats(CHATS) ? CHATS : [];
 const chatModels = CHAT_MODELS;
 
 export const handlers = [
-    // 사용 예시를 위한 api 입니다.
-    http.get('/test', async () => {
-        return HttpResponse.json({
-            test: 'test',
-        });
-    }),
-
     // 채팅 목록
     http.get('/chats', async () => {
         return HttpResponse.json({
@@ -24,7 +33,7 @@ export const handlers = [
     }),
 
     // 채팅 생성
-    http.post<any, { chat_model_id: string }, any>('/chats', async ({ request }) => {
+    http.post<{}, { chat_model_id: string }, Data<Chat[]>>('/chats', async ({ request }) => {
         const { chat_model_id } = await request.json();
 
         chatData.push({
@@ -41,7 +50,7 @@ export const handlers = [
     }),
 
     // 단일 채팅 조회
-    http.get<{ chatId: string }, any, any, '/chats/:chatId'>('/chats/:chatId', async ({ params }) => {
+    http.get<{ chatId: string }, {}, Data<Chat | undefined>, '/chats/:chatId'>('/chats/:chatId', async ({ params }) => {
         const { chatId } = params;
         const data = chatData.find((chat) => chat.chat_id === chatId);
 
@@ -51,14 +60,17 @@ export const handlers = [
     }),
 
     // 단일 채팅에 대화 추가
-    http.post<{ chatId: string }, { prompt: string }, any, '/chats/:chatId/dialogues'>(
+    http.post<{ chatId: string }, { prompt: string }, Data<Chat>, '/chats/:chatId/dialogues'>(
         '/chats/:chatId/dialogues',
         async ({ params, request }) => {
             await delay(2000);
             const { chatId } = params;
             const { prompt } = await request.json();
 
-            const data: any = chatData.find((chat) => chat.chat_id === chatId) || [];
+            const data = chatData.find((chat) => chat.chat_id === chatId);
+
+            if (!data) return;
+
             const response = {
                 ...data,
                 dialogues: data.dialogues.concat({
@@ -81,11 +93,4 @@ export const handlers = [
             });
         },
     ),
-
-    // 모델 목록
-    http.get('/chat_model', async () => {
-        return HttpResponse.json({
-            data: chatModels,
-        });
-    }),
 ];

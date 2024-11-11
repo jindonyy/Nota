@@ -1,7 +1,7 @@
+import { Chat } from '@/apis/chat';
 import { v4 as uuidv4 } from 'uuid';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const CHATS: Record<string, any>[] = [
+export const CHATS: Record<string, Chat[keyof Chat]>[] = [
     {
         chat_model_id: 'test-model-002',
         chat_model_name: 'Nota_Model_02',
