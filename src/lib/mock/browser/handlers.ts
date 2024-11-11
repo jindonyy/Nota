@@ -2,8 +2,9 @@ import { delay, http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
-import { Chat } from '@/apis';
+import { GetChatResponse } from '@/apis';
 import { Data } from '@/types/data';
+import { Chat } from '@/models/chat';
 
 const isChats = (data: typeof CHATS): data is Chat[] => {
     return data.every(
@@ -50,9 +51,11 @@ export const handlers = [
     }),
 
     // 단일 채팅 조회
-    http.get<{ chatId: string }, {}, Data<Chat | undefined>, '/chats/:chatId'>('/chats/:chatId', async ({ params }) => {
+    http.get<{ chatId: string }, {}, GetChatResponse, '/chats/:chatId'>('/chats/:chatId', async ({ params }) => {
         const { chatId } = params;
         const data = chatData.find((chat) => chat.chat_id === chatId);
+
+        if (!data) return;
 
         return HttpResponse.json({
             data,

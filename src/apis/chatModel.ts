@@ -8,9 +8,7 @@ export type ChatModels = {
     data: ChatModel[];
 };
 
-export const CHAT_MODEL_API = '/chat_model';
-
 export const serverGetChatModels = async (init?: RequestInit) => {
-    const data = await serverFetch<ChatModels>(CHAT_MODEL_API, init);
+    const data = await serverFetch<ChatModels>('/chat_model', init);
     return data;
 };

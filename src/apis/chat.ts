@@ -1,40 +1,29 @@
+'use client';
+
+import { queryKeys } from '@/constants/queryKeys';
+import { Chat } from '@/models/chat';
 import { clientFetch } from '@/modules';
-import { useWorkerStore } from '@/stores/worker';
+import { Data } from '@/types/data';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
 
-export type Dialogue = {
-    dialogue_id: string;
-    prompt: string;
-    completion: string;
-};
-
-export type Chat = {
-    chat_model_id: string;
-    chat_model_name: string;
-    chat_id: string;
-    dialogues: Dialogue[];
-};
-
-export type Chats = {
-    data: Chat[];
-};
-
-export const CHATS_API = '/chats';
+export type GetChatsResponse = Data<Chat[]>;
 
 export const clientGetChats = (init?: RequestInit) => {
-    const isWorkerActive = useWorkerStore(({ isWorkerActive }) => isWorkerActive);
-
     const result = useSuspenseQuery({
-        queryKey: [CHATS_API],
-        queryFn: async () => (isWorkerActive ? await clientFetch<Chats>(CHATS_API, init) : { data: [] }),
+        queryKey: [queryKeys.getChats],
+        queryFn: async () => await clientFetch<GetChatsResponse>('/chats', init),
     });
 
-    useEffect(() => {
-        if (isWorkerActive) {
-            result.refetch();
-        }
-    }, [isWorkerActive]);
+    return result;
+};
+
+export type GetChatResponse = Data<Chat>;
+
+export const clientGetChat = (chatId: string, init?: RequestInit) => {
+    const result = useSuspenseQuery({
+        queryKey: [queryKeys.getChat, chatId],
+        queryFn: async () => await clientFetch<GetChatResponse>(`/chats/${chatId}`, init),
+    });
 
     return result;
 };
