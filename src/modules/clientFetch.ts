@@ -22,7 +22,7 @@ export const clientFetch = async <T>(...args: Parameters<typeof fetch>) => {
     } catch (error) {
         if (error instanceof HttpError) {
             console.error(`Fetch error: ${error.message} (Status: ${error.status})`);
-            throw error;
         }
+        throw error;
     }
 };
