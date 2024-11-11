@@ -1,21 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Icon from '@/components/Icon';
+import NotaIcon from '@/components/NotaIcon';
 
 const meta = {
     title: 'Icon',
-    component: Icon,
+    component: NotaIcon,
     parameters: {
         layout: 'centered',
     },
     tags: ['autodocs'],
     argTypes: {
-        variant: { control: 'select', options: ['pencil', 'send', 'up', 'down'] },
+        variant: { control: 'select', options: ['pencil', 'send', 'up', 'down', 'user'] },
         size: { control: 'select', options: ['default', 'sm', 'lg'] },
         color: { control: 'select', options: ['primary', 'secondary'] },
     },
     args: {},
-} satisfies Meta<typeof Icon>;
+} satisfies Meta<typeof NotaIcon>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

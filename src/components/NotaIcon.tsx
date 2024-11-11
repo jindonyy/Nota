@@ -1,5 +1,5 @@
 import { BsPencilSquare } from 'react-icons/bs';
-import { FaArrowDown, FaArrowUp } from 'react-icons/fa6';
+import { FaArrowDown, FaArrowUp, FaUser } from 'react-icons/fa6';
 import { RiSendPlaneFill } from 'react-icons/ri';
 
 const component = {
@@ -7,12 +7,13 @@ const component = {
     send: RiSendPlaneFill,
     up: FaArrowUp,
     down: FaArrowDown,
+    user: FaUser,
 };
 
 const sizes = {
-    default: '24px',
-    sm: '18px',
-    lg: '30px',
+    default: '20px',
+    sm: '14px',
+    lg: '24px',
 };
 
 const colors = {
