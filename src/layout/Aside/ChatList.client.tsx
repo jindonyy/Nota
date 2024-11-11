@@ -1,14 +1,14 @@
 'use client';
 
-import { clientGetChats } from '@/apis/chat';
+import { clientGetChats } from '@/apis';
 import ChatItem from '@/layout/Aside/ChatItem.client';
 import { useParams } from 'next/navigation';
 
-interface Props {}
-
-export default function ChatList(props: Props) {
+export default function ChatList() {
     const { data } = clientGetChats();
-    const params = useParams<{ chatId: string }>();
+    const params = useParams<{ chat_id: string }>();
 
-    return data.data.map((chat) => <ChatItem key={chat.chat_id} data={chat} active={params.chatId === chat.chat_id} />);
+    return data.data.map((chat) => (
+        <ChatItem key={chat.chat_id} data={chat} active={params.chat_id === chat.chat_id} />
+    ));
 }

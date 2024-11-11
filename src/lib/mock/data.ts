@@ -1,4 +1,4 @@
-import { Chat } from '@/apis/chat';
+import { Chat } from '@/apis';
 import { v4 as uuidv4 } from 'uuid';
 
 export const CHATS: Record<string, Chat[keyof Chat]>[] = [

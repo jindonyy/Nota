@@ -1,4 +1,4 @@
-import { Chat } from '@/apis/chat';
+import { Chat } from '@/apis';
 import Link from 'next/link';
 
 interface Props {

@@ -1,6 +1,6 @@
 'use client';
 
-import type { ChatModels } from '@/apis/chatModel';
+import type { ChatModels } from '@/apis';
 import NotaSelect from '@/components/NotaSelect';
 import { DEFAULT_CHAT_MODEL } from '@/constants';
 import { getFormattedSelectOption } from '@/utils/form';

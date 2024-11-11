@@ -1,4 +1,4 @@
-import { serverGetChatModels } from '@/apis/chatModel';
+import { serverGetChatModels } from '@/apis';
 import ChatModelSelect from '@/layout/Header/ChatModelSelect.client';
 
 export default async function ChatModel() {

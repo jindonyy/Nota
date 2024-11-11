@@ -2,7 +2,7 @@ import { delay, http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
 
 import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
-import { Chat } from '@/apis/chat';
+import { Chat } from '@/apis';
 import { Data } from '@/types/data';
 
 const isChats = (data: typeof CHATS): data is Chat[] => {
