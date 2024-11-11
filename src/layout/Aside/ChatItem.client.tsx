@@ -11,7 +11,7 @@ export default function ChatItem(props: Props) {
 
     return (
         data.dialogues[0] && (
-            <li className={`aside-chat-item${active ? '-active' : ''}`}>
+            <li className={`aside-chat-item ${active ? 'active' : ''}`}>
                 <Link href={`/${data.chat_id}?model=${data.chat_model_id}`}>
                     <p className="aside-chat-item-title">{data.dialogues[0].prompt}</p>
                     <span className="aside-chat-item-model">{data.chat_model_name}</span>
