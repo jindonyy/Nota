@@ -1,8 +1,9 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 import NotaIcon from '@/components/NotaIcon';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/shadcn/avatar';
-import { ReactNode } from 'react';
 
 interface Props {
     imageUrl?: string;

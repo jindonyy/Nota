@@ -1,6 +1,5 @@
 'use client';
 
-import { useWorkerStore } from '@/stores/worker';
 import type { PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 

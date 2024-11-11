@@ -8,6 +8,6 @@ interface WorkerStore {
 
 export const useWorkerStore = create<WorkerStore>((set) => ({
     isWorkerActive: false,
-    onWorkerActive: () => set(({ isWorkerActive }) => ({ isWorkerActive: true })),
-    offWorkerActive: () => set(({ isWorkerActive }) => ({ isWorkerActive: false })),
+    onWorkerActive: () => set(() => ({ isWorkerActive: true })),
+    offWorkerActive: () => set(() => ({ isWorkerActive: false })),
 }));

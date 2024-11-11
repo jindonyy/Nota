@@ -1,5 +1,6 @@
-import { Chat } from '@/models/chat';
 import { v4 as uuidv4 } from 'uuid';
+
+import type { Chat } from '@/models/chat';
 
 export const CHATS: Record<string, Chat[keyof Chat]>[] = [
     {

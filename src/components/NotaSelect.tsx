@@ -1,5 +1,7 @@
 'use client';
 
+import * as React from 'react';
+
 import {
     Select,
     SelectContent,
@@ -9,7 +11,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/shadcn/select';
-import * as React from 'react';
 
 interface Props {
     options: (string | { label: string; value: string })[];

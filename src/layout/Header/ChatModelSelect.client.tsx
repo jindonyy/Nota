@@ -1,10 +1,11 @@
 'use client';
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import type { ChatModels } from '@/apis';
 import NotaSelect from '@/components/NotaSelect';
 import { DEFAULT_CHAT_MODEL } from '@/constants';
 import { getFormattedSelectOption } from '@/utils/form';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 interface Props {
     data: ChatModels;

@@ -1,5 +1,6 @@
+import type { ReactNode } from 'react';
+
 import NotaAvatar from '@/components/NotaAvatar';
-import { ReactNode } from 'react';
 
 interface Props {
     text: string;
@@ -18,5 +19,4 @@ export default function Message(props: Props) {
             <p className="px-3 py-2.5 rounded-sm bg-[var(--gray-750)] tracking-wide">{text}</p>
         </div>
     );
-    7;
 }

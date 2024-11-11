@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { delay, http, HttpResponse } from 'msw';
 import { v4 as uuidv4 } from 'uuid';
 
+import type { GetChatResponse, PostDialoguesRequest } from '@/apis';
 import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
-import { GetChatResponse, PostDialoguesRequest } from '@/apis';
-import { Data } from '@/types/data';
-import { Chat } from '@/models/chat';
+import type { Chat } from '@/models/chat';
+import type { Data } from '@/types/data';
 
 const isChats = (data: typeof CHATS): data is Chat[] => {
     return data.every(
@@ -34,7 +35,7 @@ export const handlers = [
     }),
 
     // 채팅 생성
-    http.post<{}, { chat_model_id: string }, Data<Chat[]>>('/chats', async ({ request }) => {
+    http.post<any, { chat_model_id: string }, Data<Chat[]>>('/chats', async ({ request }) => {
         const { chat_model_id } = await request.json();
 
         chatData.push({
@@ -51,7 +52,7 @@ export const handlers = [
     }),
 
     // 단일 채팅 조회
-    http.get<{ chatId: string }, {}, GetChatResponse, '/chats/:chatId'>('/chats/:chatId', async ({ params }) => {
+    http.get<{ chatId: string }, any, GetChatResponse, '/chats/:chatId'>('/chats/:chatId', async ({ params }) => {
         const { chatId } = params;
         const data = chatData.find((chat) => chat.chat_id === chatId);
 

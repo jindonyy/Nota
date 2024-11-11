@@ -1,9 +1,7 @@
-import { randomUUID } from 'crypto';
-
-import { CHAT_MODELS, CHATS } from '@/lib/mock/data';
 import type { Request, Response } from 'express';
 
-let chatData = CHATS;
+import { CHAT_MODELS } from '@/lib/mock/data';
+
 const chatModels = CHAT_MODELS;
 
 // 모델 목록

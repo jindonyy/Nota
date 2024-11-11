@@ -1,19 +1,20 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
-import { clientPostChat } from '@/apis/chat';
+import './ChatInput.scss';
+
+import { usePostChat } from '@/apis';
+import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/shadcn/form';
 import { Textarea } from '@/components/shadcn/textarea';
-import NotaIcon from '@/components/NotaIcon';
-import { useParams } from 'next/navigation';
-import './ChatInput.scss';
-import { useQueryClient } from '@tanstack/react-query';
 import { queryKeys } from '@/constants/queryKeys';
-import { useEffect } from 'react';
 
 const FormSchema = z.object({
     prompt: z.string().min(1),
@@ -26,7 +27,7 @@ export function ChatInput() {
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
     const queryClient = useQueryClient();
-    const { mutate, isSuccess } = clientPostChat(params.chat_id);
+    const { mutate, isSuccess } = usePostChat(params.chat_id);
 
     const onSubmit = (data: z.infer<typeof FormSchema>) => {
         mutate(

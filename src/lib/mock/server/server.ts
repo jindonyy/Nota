@@ -1,7 +1,7 @@
-import { getChatModel } from './handlers';
-
 import cors from 'cors';
 import express from 'express';
+
+import { getChatModel } from './handlers';
 
 const app = express();
 const port = 9090;

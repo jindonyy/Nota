@@ -3,7 +3,12 @@ const path = require('path');
 
 module.exports = {
     root: true,
-    extends: ['plugin:@typescript-eslint/recommended', 'next/core-web-vitals', 'prettier', 'plugin:storybook/recommended'],
+    extends: [
+        'plugin:@typescript-eslint/recommended',
+        'next/core-web-vitals',
+        'prettier',
+        'plugin:storybook/recommended',
+    ],
     plugins: ['no-relative-import-paths', 'unused-imports', '@typescript-eslint'],
     parserOptions: {
         project: path.join(__dirname, '/tsconfig.json'),

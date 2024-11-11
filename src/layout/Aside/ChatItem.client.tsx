@@ -1,5 +1,6 @@
-import { Chat } from '@/models/chat';
 import Link from 'next/link';
+
+import type { Chat } from '@/models/chat';
 
 interface Props {
     data: Chat;

@@ -1,14 +1,15 @@
 'use client';
 
-import { queryKeys } from '@/constants/queryKeys';
-import { Chat } from '@/models/chat';
-import { clientFetch } from '@/modules';
-import { Data } from '@/types/data';
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
+
+import { queryKeys } from '@/constants/queryKeys';
+import type { Chat } from '@/models/chat';
+import { clientFetch } from '@/modules';
+import type { Data } from '@/types/data';
 
 export type GetChatsResponse = Data<Chat[]>;
 
-export const clientGetChats = (init?: RequestInit) => {
+export const useGetChats = (init?: RequestInit) => {
     const result = useSuspenseQuery({
         queryKey: [queryKeys.getChats],
         queryFn: async () => await clientFetch<GetChatsResponse>('/chats', init),
@@ -19,7 +20,7 @@ export const clientGetChats = (init?: RequestInit) => {
 
 export type GetChatResponse = Data<Chat>;
 
-export const clientGetChat = (chatId: string, init?: RequestInit) => {
+export const useGetChat = (chatId: string, init?: RequestInit) => {
     const result = useSuspenseQuery({
         queryKey: [queryKeys.getChat, chatId],
         queryFn: async () => await clientFetch<GetChatResponse>(`/chats/${chatId}`, init),
@@ -30,7 +31,7 @@ export const clientGetChat = (chatId: string, init?: RequestInit) => {
 export type PostDialoguesRequest = { prompt: string };
 export type PostDialoguesResponse = Data<Chat>;
 
-export const clientPostChat = (chatId: string) => {
+export const usePostChat = (chatId: string) => {
     const result = useMutation({
         mutationFn: (request: PostDialoguesRequest) =>
             clientFetch(`/chats/${chatId}/dialogues`, {

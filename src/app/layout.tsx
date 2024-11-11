@@ -1,8 +1,9 @@
 import '@/styles/globals.scss';
-import RootLayout from '@/layout/RootLayout';
-import Providers from '@/providers';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+
+import RootLayout from '@/layout/RootLayout';
+import Providers from '@/providers';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',

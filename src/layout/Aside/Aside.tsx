@@ -1,6 +1,7 @@
+import Link from 'next/link';
 import { Suspense } from 'react';
 import './Aside.scss';
-import Link from 'next/link';
+
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import ChatList from '@/layout/Aside/ChatList.client';
