@@ -1,0 +1,11 @@
+@use '@/styles/variables.module' as var;
+@use '@/styles/mixins.module';
+
+.layout {
+    @include mixins.flex(space-between);
+}
+
+.layout-right {
+    padding-left: var.$aside-width;
+    flex-grow: 1;
+}
