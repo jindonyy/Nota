@@ -33,14 +33,15 @@ const config = {
                 primary: {
                     DEFAULT: 'var(--primary)',
                     foreground: 'var(--primary-foreground)',
+                    focus: 'var(--primary-focus)',
                 },
                 secondary: {
                     DEFAULT: 'var(--secondary)',
                     foreground: 'var(--secondary-foreground)',
                 },
                 muted: {
-                    DEFAULT: 'hsl(var(--muted))',
-                    foreground: 'hsl(var(--muted-foreground))',
+                    DEFAULT: 'var(--muted)',
+                    foreground: 'var(--muted-foreground)',
                 },
                 accent: {
                     DEFAULT: 'hsl(var(--accent))',
@@ -50,8 +51,8 @@ const config = {
                     DEFAULT: 'hsl(var(--destructive))',
                     foreground: 'hsl(var(--destructive-foreground))',
                 },
-                border: 'hsl(var(--border))',
-                input: 'hsl(var(--input))',
+                border: 'var(--border)',
+                input: 'var(--input)',
                 ring: 'hsl(var(--ring))',
                 chart: {
                     '1': 'hsl(var(--chart-1))',
