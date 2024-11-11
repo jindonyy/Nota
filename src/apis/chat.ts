@@ -23,9 +23,18 @@ export type Chats = {
 export const CHATS_API = '/chats';
 
 export const clientGetChats = (init?: RequestInit) => {
+    const isWorkerActive = useWorkerStore(({ isWorkerActive }) => isWorkerActive);
+
     const result = useSuspenseQuery({
         queryKey: [CHATS_API],
-        queryFn: async () => clientFetch<Chats>(CHATS_API, init),
+        queryFn: async () => (isWorkerActive ? await clientFetch<Chats>(CHATS_API, init) : { data: [] }),
     });
+
+    useEffect(() => {
+        if (isWorkerActive) {
+            result.refetch();
+        }
+    }, [isWorkerActive]);
+
     return result;
 };
