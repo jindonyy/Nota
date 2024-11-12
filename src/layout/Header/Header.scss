@@ -5,6 +5,7 @@
     @include mixins.position(fixed, 0, 0, auto, auto);
     @include mixins.flex(space-between);
 
+    z-index: 100;
     width: calc(100% - var.$aside-width);
     height: var.$header-height;
     padding: 0 25px;

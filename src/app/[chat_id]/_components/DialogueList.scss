@@ -2,20 +2,23 @@
 @use '@/styles/mixins.module';
 
 .dialogue-list {
-    @include mixins.flex(flex-start, stretch, column, 20px);
+    @include mixins.flex(flex-start, stretch, column, 30px);
 
-    max-width: calc(768px - var.$aside-width);
-    min-width: calc(667px - var.$aside-width);
+    max-width: var.$chat-list-max-width;
     margin: 0 auto;
-    padding: 20px 15px;
+    padding: 15px 0 calc(var.$dialogue-input-height + 30px);
 }
 
 .dialogue-item {
-    @include mixins.flex(space-between, stretch, column, 20px);
+    @include mixins.flex(space-between, stretch, column, 15px);
 }
 
 .dialogue-prompt {
     @include mixins.flex(flex-end);
+
+    .message {
+        max-width: 80%;
+    }
 }
 
 .dialogue-completion {

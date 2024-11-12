@@ -2,21 +2,27 @@
 @use '@/styles/mixins.module';
 
 .chat-input {
-    @include mixins.position(fixed, auto, 50%, 20px, auto);
-    @include mixins.flex(space-between, center, row, 5px);
+    @include mixins.position(fixed, auto, 50%, 0, auto);
 
-    width: 100%;
-    max-width: calc(768px - var.$aside-width);
+    width: calc(100% - var.$aside-width);
     margin-right: calc(var.$aside-width / 2 * -1);
+    padding: 0 15px 20px;
     transform: translateX(50%);
+    background-color: var(--background);
+}
+
+.chat-input-content {
+    @include mixins.flex(space-between, center, row, 0);
+
+    flex-grow: 1;
+    max-width: var.$chat-list-max-width;
+    margin: 0 auto;
+    border: 1px solid var(--input);
+    border-radius: var(--radius);
 }
 
 .chat-input-textarea {
-    flex-grow: 1;
-
-    & textarea {
-        height: 80px;
-        font-size: 16px;
-        line-height: 1.4;
-    }
+    height: 80px;
+    line-height: 1.4;
+    border: 0;
 }

@@ -55,16 +55,26 @@ export function ChatInput() {
                     control={form.control}
                     name="prompt"
                     render={({ field }) => (
-                        <FormItem className="chat-input-textarea">
+                        <FormItem className="chat-input-content">
                             <FormControl>
-                                <Textarea placeholder="무엇이든 물어보세요" className="resize-none" {...field} />
+                                <Textarea
+                                    placeholder="무엇이든 물어보세요"
+                                    className="chat-input-textarea resize-none"
+                                    {...field}
+                                />
                             </FormControl>
+                            <Button
+                                className="chat-input-button"
+                                type="submit"
+                                size="icon"
+                                variant="ghost"
+                                disabled={prompt.length < 1}
+                            >
+                                <NotaIcon variant="send" />
+                            </Button>
                         </FormItem>
                     )}
                 />
-                <Button type="submit" size="icon" variant="ghost" disabled={prompt.length < 1}>
-                    <NotaIcon variant="send" />
-                </Button>
             </form>
         </Form>
     );

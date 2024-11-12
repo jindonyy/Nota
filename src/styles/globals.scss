@@ -54,6 +54,12 @@
         --chart-3: 30 80% 55%;
         --chart-4: 280 65% 60%;
         --chart-5: 340 75% 55%;
+
+        /** z-index */
+        --z-aside: 50;
+        --z-prompt-input: 100;
+        --z-header: 200;
+        --z-toast: 500;
     }
 
     * {
@@ -75,6 +81,7 @@
         background: var(--background);
         overscroll-behavior: auto;
         word-break: break-word;
+        font-size: 15px;
     }
 
     li {
