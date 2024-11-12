@@ -5,6 +5,7 @@
     @include mixins.flex(space-between, flex-start);
 
     position: relative;
+    z-index: 0;
 }
 
 .layout-main {

@@ -1,7 +1,5 @@
 'use client';
 
-import * as React from 'react';
-
 import {
     Select,
     SelectContent,
@@ -11,24 +9,23 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/shadcn/select';
+import { ComponentProps } from 'react';
 
-interface Props {
+interface Props extends ComponentProps<typeof Select> {
     options: (string | { label: string; value: string })[];
-    defaultValue?: string;
     label?: string;
     placeholder?: string;
-    onChange?: React.ComponentProps<typeof Select>['onValueChange'];
 }
 
 export default function NotaSelect(props: Props) {
-    const { options, label, defaultValue, placeholder, onChange } = props;
+    const { options, label, placeholder, ...rest } = props;
 
     return (
-        <Select defaultValue={defaultValue} onValueChange={onChange}>
+        <Select {...rest}>
             <SelectTrigger className="select-trigger gap-1 break-all text-primary-foreground border-0">
                 <SelectValue placeholder={placeholder} />
             </SelectTrigger>
-            <SelectContent className="select-content bg-primary text-primary-foreground">
+            <SelectContent className="select-content bg-primary text-primary-foreground z-select">
                 <SelectGroup>
                     {label && <SelectLabel>{label}</SelectLabel>}
                     {options.map((option) => {

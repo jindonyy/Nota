@@ -62,6 +62,10 @@ const config = {
                     '5': 'hsl(var(--chart-5))',
                 },
             },
+            zIndex: {
+                select: 'var(--select)',
+                toast: 'var(--z-toast)',
+            },
         },
     },
     plugins: [tailwindcssAnimate],

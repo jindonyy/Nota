@@ -1,11 +1,11 @@
 'use client';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import NotaSelect from '@/components/NotaSelect';
-import { DEFAULT_CHAT_MODEL } from '@/constants';
 import type { ChatModels } from '@/models';
-import { getFormattedSelectOption } from '@/utils/form';
+import { getTransformSelectOption } from '@/utils/form';
+import { DEFAULT_CHAT_MODEL } from '@/constants';
 
 interface Props {
     data: ChatModels;
@@ -13,21 +13,34 @@ interface Props {
 
 export default function ChatModelSelect(props: Props) {
     const { data } = props;
-    const pathname = usePathname();
+    const params = useParams<{ chat_id: string }>();
     const searchParams = useSearchParams();
-    const params = new URLSearchParams(searchParams.toString());
     const router = useRouter();
-    const options = getFormattedSelectOption(data.data, 'chat_model_name', 'chat_model_id');
+    const options = getTransformSelectOption(data.data, 'chat_model_name', 'chat_model_id');
     const currentModel = searchParams.get('model') ?? DEFAULT_CHAT_MODEL.chat_model_id;
+    const isNewChatPage = !params.chat_id;
 
     const handleSelect = (value: string) => {
-        params.set('model', value);
-        router.replace(`${pathname}?${params.toString()}`);
+        const newSearchParams = new URLSearchParams(searchParams.toString());
+        newSearchParams.set('model', value);
+        const newUrl = `/?${newSearchParams.toString()}`;
+
+        if (isNewChatPage) {
+            router.replace(newUrl);
+        } else {
+            router.push(newUrl);
+        }
     };
 
     return (
         <div className="header-chat-model-select">
-            <NotaSelect onChange={handleSelect} options={options} defaultValue={currentModel} />
+            <NotaSelect
+                onValueChange={handleSelect}
+                options={options}
+                defaultValue={currentModel}
+                value={currentModel}
+                placeholder="모델을 선택해주세요"
+            />
         </div>
     );
 }
