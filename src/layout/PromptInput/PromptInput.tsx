@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
-import './ChatInput.scss';
+import './PromptInput.scss';
 
 import { usePostChat } from '@/app/[chat_id]/_apis';
 import NotaIcon from '@/components/NotaIcon';
@@ -20,7 +20,7 @@ const FormSchema = z.object({
     prompt: z.string().min(1),
 });
 
-export function ChatInput() {
+export function PromptInput() {
     const params = useParams<{ chat_id: string }>();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
@@ -50,21 +50,21 @@ export function ChatInput() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="chat-input">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="prompt-input">
                 <FormField
                     control={form.control}
                     name="prompt"
                     render={({ field }) => (
-                        <FormItem className="chat-input-content">
+                        <FormItem className="prompt-input-content">
                             <FormControl>
                                 <Textarea
                                     placeholder="무엇이든 물어보세요"
-                                    className="chat-input-textarea resize-none"
+                                    className="prompt-input-textarea resize-none"
                                     {...field}
                                 />
                             </FormControl>
                             <Button
-                                className="chat-input-button"
+                                className="prompt-input-button"
                                 type="submit"
                                 size="icon"
                                 variant="ghost"

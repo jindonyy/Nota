@@ -6,7 +6,7 @@
 
     max-width: var.$chat-list-max-width;
     margin: 0 auto;
-    padding: 15px 0 calc(var.$dialogue-input-height + 30px);
+    padding: 15px 0 calc(var.$prompt-input-height + 30px);
 }
 
 .dialogue-item {

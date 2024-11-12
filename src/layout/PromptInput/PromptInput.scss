@@ -1,7 +1,7 @@
 @use '@/styles/variables.module' as var;
 @use '@/styles/mixins.module';
 
-.chat-input {
+.prompt-input {
     @include mixins.position(fixed, auto, 50%, 0, auto);
 
     width: calc(100% - var.$aside-width);
@@ -11,7 +11,7 @@
     background-color: var(--background);
 }
 
-.chat-input-content {
+.prompt-input-content {
     @include mixins.flex(space-between, center, row, 0);
 
     flex-grow: 1;
@@ -21,7 +21,7 @@
     border-radius: var(--radius);
 }
 
-.chat-input-textarea {
+.prompt-input-textarea {
     height: 80px;
     line-height: 1.4;
     border: 0;
