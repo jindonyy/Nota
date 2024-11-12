@@ -21,7 +21,7 @@ export default function DialogueList() {
     }, []);
 
     return (
-        <div className="dialogue-list">
+        <div className="chat-dialogue-list">
             {data?.dialogues.map((dialogue) => <DialogueItem key={dialogue.dialogue_id} data={dialogue} />)}
         </div>
     );

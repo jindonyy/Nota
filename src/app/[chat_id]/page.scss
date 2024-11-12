@@ -4,5 +4,5 @@
     overflow: hidden auto;
     height: 100%;
     min-height: calc(100dvh - var.$header-height);
-    padding: 0 15px;
+    padding: 15px 15px calc(var.$prompt-input-height + 30px);
 }
