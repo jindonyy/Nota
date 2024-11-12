@@ -1,22 +1,13 @@
-import Link from 'next/link';
 import { Suspense } from 'react';
 import './Aside.scss';
-
-import NotaIcon from '@/components/NotaIcon';
-import { Button } from '@/components/shadcn/button';
 import ChatList from '@/layout/Aside/ChatList.client';
 import ChatListSkeleton from '@/layout/Aside/ChatListSkeleton';
+import AsideHeader from '@/layout/Aside/AsideHeader.client';
 
 export default function Aside() {
     return (
         <aside className="aside">
-            <div className="aside-header">
-                <Button asChild size="icon" variant="ghost">
-                    <Link href="/">
-                        <NotaIcon variant="pencil" />
-                    </Link>
-                </Button>
-            </div>
+            <AsideHeader />
             <Suspense fallback={<ChatListSkeleton />}>
                 <ChatList />
             </Suspense>

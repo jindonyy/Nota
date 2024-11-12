@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
@@ -22,12 +22,14 @@ const FormSchema = z.object({
 
 export function PromptInput() {
     const params = useParams<{ chat_id: string }>();
+    const searchParams = useSearchParams();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
     const queryClient = useQueryClient();
     const { mutate, isSuccess } = usePostChat(params.chat_id);
+    const currentModel = searchParams.get('model');
 
     const onSubmit = (data: z.infer<typeof FormSchema>) => {
         mutate(
@@ -48,6 +50,10 @@ export function PromptInput() {
         });
     }, [isSuccess]);
 
+    useEffect(() => {
+        form.setValue('prompt', '');
+    }, [searchParams]);
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="prompt-input">
@@ -58,7 +64,8 @@ export function PromptInput() {
                         <FormItem className="prompt-input-content">
                             <FormControl>
                                 <Textarea
-                                    placeholder="무엇이든 물어보세요"
+                                    disabled={!currentModel}
+                                    placeholder={currentModel ? '무엇이든 물어보세요' : '대화할 모델을 선택해주세요'}
                                     className="prompt-input-textarea resize-none"
                                     {...field}
                                 />

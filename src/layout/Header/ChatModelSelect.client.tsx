@@ -6,22 +6,26 @@ import NotaSelect from '@/components/NotaSelect';
 import type { ChatModels } from '@/models';
 import { getTransformSelectOption } from '@/utils/form';
 import { DEFAULT_CHAT_MODEL } from '@/constants';
+import { useLayoutEffect } from 'react';
 
 interface Props {
     data: ChatModels;
 }
 
 export default function ChatModelSelect(props: Props) {
-    const { data } = props;
+    const {
+        data: { data },
+    } = props;
     const params = useParams<{ chat_id: string }>();
     const searchParams = useSearchParams();
+    const newSearchParams = new URLSearchParams(searchParams.toString());
     const router = useRouter();
-    const options = getTransformSelectOption(data.data, 'chat_model_name', 'chat_model_id');
-    const currentModel = searchParams.get('model') ?? DEFAULT_CHAT_MODEL.chat_model_id;
+    const options = getTransformSelectOption(data, 'chat_model_name', 'chat_model_id');
+    const defaultChatModel = data[0];
+    const currentModel = searchParams.get('model') ?? defaultChatModel?.chat_model_id;
     const isNewChatPage = !params.chat_id;
 
     const handleSelect = (value: string) => {
-        const newSearchParams = new URLSearchParams(searchParams.toString());
         newSearchParams.set('model', value);
         const newUrl = `/?${newSearchParams.toString()}`;
 
@@ -31,6 +35,13 @@ export default function ChatModelSelect(props: Props) {
             router.push(newUrl);
         }
     };
+
+    useLayoutEffect(() => {
+        if (isNewChatPage && defaultChatModel) {
+            newSearchParams.set('model', defaultChatModel?.chat_model_id);
+            router.replace(`/?${newSearchParams.toString()}`);
+        }
+    }, []);
 
     return (
         <div className="header-chat-model-select">
