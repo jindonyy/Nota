@@ -8,18 +8,6 @@ const nextConfig = {
     sassOptions: {
         includePaths: [path.resolve(__dirname, './src/styles')],
     },
-    /**
-     * @type {import('next').NextConfig['eslint']}
-     **/
-    eslint: {
-        ignoreDuringBuilds: true,
-    },
-    /**
-     * @type {import('next').NextConfig['typescript']}
-     **/
-    typescript: {
-        ignoreBuildErrors: false,
-    },
 };
 
 export default nextConfig;
