@@ -37,6 +37,8 @@
 }
 
 .aside-chat-item-model {
+    @include mixins.ellipsis(1);
+
     display: block;
     width: 100%;
     margin-top: 6px;
@@ -50,12 +52,19 @@
 }
 
 .aside-chat-item-title-skeleton {
+    width: 80%;
     height: 15px;
     padding: 2px 0;
 }
 
 .aside-chat-item-model-skeleton {
-    height: 13px;
-    margin-top: 8px;
-    padding: 2px 0;
+    text-align: right;
+
+    .skeleton {
+        display: inline-block;
+        width: 45%;
+        height: 13px;
+        margin-top: 8px;
+        padding: 2px 0;
+    }
 }
