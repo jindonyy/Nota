@@ -4,4 +4,6 @@ $chat-list-max-width: 650px;
 
 /** height */
 $header-height: 65px;
-$prompt-input-height: 102px;
+$prompt-input-content-height: 80px;
+$prompt-input-bottom-padding: 35px;
+$prompt-input-height: calc($prompt-input-content-height + $prompt-input-bottom-padding);

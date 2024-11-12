@@ -6,7 +6,7 @@
 
     width: calc(100% - var.$aside-width);
     margin-right: calc(var.$aside-width / 2 * -1);
-    padding: 0 15px 20px;
+    padding: 0 15px var.$prompt-input-bottom-padding;
     transform: translateX(50%);
     background-color: var(--background);
 }
@@ -14,15 +14,21 @@
 .prompt-input-content {
     @include mixins.flex(space-between, center, row, 0);
 
-    flex-grow: 1;
     max-width: var.$chat-list-max-width;
+    height: var.$prompt-input-content-height;
     margin: 0 auto;
+    padding: 10px 5px 10px 15px;
+    flex-grow: 1;
     border: 1px solid var(--input);
     border-radius: var(--radius);
+    background: var(--border);
 }
 
 .prompt-input-textarea {
-    height: 80px;
+    height: 100%;
+    min-height: auto #{!important};
+    padding: 0 #{!important};
+    font-size: inherit #{!important};
     line-height: 1.4;
     border: 0;
 }
