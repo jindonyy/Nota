@@ -1,5 +1,5 @@
 import DialogueList from '@/app/[chat_id]/_components/DialogueList';
-import './chat.scss';
+import './page.scss';
 
 export default function ChatPage() {
     return (
