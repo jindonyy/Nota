@@ -7,8 +7,6 @@ export const serverFetch = async <T>(...args: Parameters<typeof fetch>) => {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            'Cache-Control': 'no-cache',
-            Pragma: 'no-cache',
             ...args[1]?.headers,
         },
     };
