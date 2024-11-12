@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import type { Chat } from '@/models/chat';
+import type { Chat } from '@/app/[chat_id]/_models';
 
 interface Props {
     data: Chat;

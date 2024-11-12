@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 
-import { useGetChat } from '@/apis';
+import { useGetChat } from '@/app/[chat_id]/_apis';
 import DialogueItem from '@/app/[chat_id]/_components/DialogueItem';
 import './DialogueList.scss';
 

@@ -9,7 +9,7 @@ import { z } from 'zod';
 
 import './ChatInput.scss';
 
-import { usePostChat } from '@/apis';
+import { usePostChat } from '@/app/[chat_id]/_apis';
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/shadcn/form';

@@ -2,9 +2,9 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import type { ChatModels } from '@/apis';
 import NotaSelect from '@/components/NotaSelect';
 import { DEFAULT_CHAT_MODEL } from '@/constants';
+import type { ChatModels } from '@/models';
 import { getFormattedSelectOption } from '@/utils/form';
 
 interface Props {

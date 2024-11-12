@@ -1,5 +1,5 @@
+import type { Dialogue } from '@/app/[chat_id]/_models';
 import Message from '@/components/Message';
-import { type Dialogue } from '@/models/chat';
 
 interface Props {
     data: Dialogue;

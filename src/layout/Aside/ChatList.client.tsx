@@ -2,7 +2,7 @@
 
 import { useParams } from 'next/navigation';
 
-import { useGetChats } from '@/apis';
+import { useGetChats } from '@/app/[chat_id]/_apis';
 import ChatItem from '@/layout/Aside/ChatItem.client';
 
 export default function ChatList() {

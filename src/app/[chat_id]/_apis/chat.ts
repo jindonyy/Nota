@@ -2,8 +2,8 @@
 
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 
+import type { Chat } from '@/app/[chat_id]/_models';
 import { queryKeys } from '@/constants/queryKeys';
-import type { Chat } from '@/models/chat';
 import { clientFetch } from '@/modules';
 import type { Data } from '@/types/data';
 
