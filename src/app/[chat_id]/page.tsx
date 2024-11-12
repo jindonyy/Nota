@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
 import './page.scss';
-import DialogueList from '@/app/[chat_id]/_components/DialogueList';
+import DialogueList from '@/app/[chat_id]/_components/DialogueList.client';
 import DialogueListSkeleton from '@/app/[chat_id]/_components/DialogueListSkeleton';
 
 export default function ChatPage() {

@@ -4,7 +4,7 @@ import './RootLayout.scss';
 
 import Aside from '@/layout/Aside/Aside';
 import Header from '@/layout/Header/Header';
-import { PromptInput } from '@/layout/PromptInput/PromptInput';
+import { PromptInput } from '@/layout/PromptInput/PromptInput.client';
 
 export default function RootLayout(props: PropsWithChildren) {
     const { children } = props;

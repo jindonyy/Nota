@@ -6,7 +6,7 @@ import NotaAvatar from '@/components/NotaAvatar';
 import ChatModel from '@/layout/Header/ChatModel';
 import ChatModelSkeleton from '@/layout/Header/ChatModelSkeleton';
 
-export default async function Header() {
+export default function Header() {
     return (
         <header className="header">
             <Suspense fallback={<ChatModelSkeleton />}>

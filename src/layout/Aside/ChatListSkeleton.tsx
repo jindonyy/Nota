@@ -1,8 +1,6 @@
-'use server';
-
 import { Skeleton } from '@/components/shadcn/skeleton';
 
-export default async function ChatListSkeleton() {
+export default function ChatListSkeleton() {
     return (
         <div className="aside-chat-list-skeleton">
             {Array.from({ length: 10 }).map((_, index) => (
