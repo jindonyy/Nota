@@ -1,0 +1,16 @@
+.error-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 100dvh;
+}
+
+.error-page-text {
+    font-size: 16px;
+    font-weight: '500';
+    line-height: 22.4px;
+    text-align: center;
+    word-wrap: 'break-word';
+}
