@@ -3,7 +3,7 @@
 import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import NotaSelect from '@/components/NotaSelect';
-import type { ChatModels } from '@/models';
+import type { ChatModels } from '@/layout/_models';
 import { getTransformSelectOption } from '@/utils/form';
 import { useEffect } from 'react';
 
