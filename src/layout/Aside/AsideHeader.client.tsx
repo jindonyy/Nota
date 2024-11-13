@@ -2,12 +2,12 @@
 
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
+import { useURLSearchParams } from '@/hooks/useURLSearchParams';
 import Link from 'next/link';
 
-import { useSearchParams } from 'next/navigation';
-
 export default function AsideHeader() {
-    const searchParams = useSearchParams();
+    const searchParams = useURLSearchParams();
+    searchParams.delete('referrer');
 
     return (
         <div className="aside-header">

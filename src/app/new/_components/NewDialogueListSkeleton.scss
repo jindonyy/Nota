@@ -1,49 +1,27 @@
 @use '@/styles/variables.module' as var;
 @use '@/styles/mixins.module';
 
-.chat-dialogue-list,
 .chat-dialogue-list-skeleton {
-    @include mixins.flex(flex-start, stretch, column, 30px);
-
     max-width: var.$chat-list-max-width;
     margin: 0 auto;
 }
 
-.chat-dialogue-item,
 .chat-dialogue-skeleton-item {
     @include mixins.flex(space-between, stretch, column, 15px);
 }
 
-.chat-dialogue-prompt,
 .chat-dialogue-skeleton-prompt {
     @include mixins.flex(flex-end);
-
-    .message {
-        max-width: 70%;
-    }
 }
 
-.chat-dialogue-completion,
 .chat-dialogue-skeleton-completion {
     @include mixins.flex(flex-start);
 }
 
 .chat-dialogue-skeleton-message {
     @include mixins.flex(space-between, flex-start, row, 20px);
-}
 
-.chat-dialogue-skeleton-prompt {
-    .chat-dialogue-skeleton-message {
-        width: 45%;
-    }
-}
-
-.chat-dialogue-skeleton-profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--gray-600);
-    flex-shrink: 0;
+    width: 45%;
 }
 
 .chat-dialogue-skeleton-content {
