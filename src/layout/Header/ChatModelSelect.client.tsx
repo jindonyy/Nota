@@ -21,8 +21,8 @@ export default function ChatModelSelect(props: Props) {
     const newSearchParams = new URLSearchParams(searchParams.toString());
     const router = useRouter();
     const options = getTransformSelectOption(data, 'chat_model_name', 'chat_model_id');
-    const defaultChatModel = data[0];
-    const currentModelId = searchParams.get('model') ?? defaultChatModel?.chat_model_id;
+    const defaultChatModelId = data[0]?.chat_model_id;
+    const currentModelId = searchParams.get('model');
     const isNewChatPage = !params.chat_id;
 
     const handleSelect = (value: string) => {
@@ -37,8 +37,8 @@ export default function ChatModelSelect(props: Props) {
     };
 
     useLayoutEffect(() => {
-        if (isNewChatPage && defaultChatModel) {
-            newSearchParams.set('model', defaultChatModel?.chat_model_id);
+        if (!currentModelId && defaultChatModelId) {
+            newSearchParams.set('model', defaultChatModelId);
             router.replace(`/?${newSearchParams.toString()}`);
         }
     }, []);
@@ -48,8 +48,8 @@ export default function ChatModelSelect(props: Props) {
             <NotaSelect
                 onValueChange={handleSelect}
                 options={options}
-                defaultValue={currentModelId}
-                value={currentModelId}
+                defaultValue={defaultChatModelId}
+                value={currentModelId ?? undefined}
                 placeholder="모델을 선택해주세요"
             />
         </div>
