@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 
 import { useGetChats } from '@/app/[chat_id]/_apis';
-import ChatItem from '@/layout/Aside/ChatItem';
+import ChatItem from '@/layout/_components/Aside/ChatItem';
 
 export default function ChatList() {
     const params = useParams<{ chat_id: string }>();

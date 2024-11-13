@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 import './Header.scss';
 
 import NotaAvatar from '@/components/NotaAvatar';
-import ChatModel from '@/layout/Header/ChatModel';
-import ChatModelSkeleton from '@/layout/Header/ChatModelSkeleton';
+import ChatModel from '@/layout/_components/Header/ChatModel';
+import ChatModelSkeleton from '@/layout/_components/Header/ChatModelSkeleton';
 
 export default function Header() {
     return (
