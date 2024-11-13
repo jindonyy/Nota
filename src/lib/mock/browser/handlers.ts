@@ -20,10 +20,20 @@ export const handlers = [
     http.post<any, { chat_model_id: string }, any>('/chats', async ({ request }) => {
         const { chat_model_id } = await request.json();
 
+        const chatModelName = chatModels.find(
+            ({ chat_model_id: modelId }) => chat_model_id === modelId,
+        )?.chat_model_name;
+
+        if (!chatModelName) {
+            return new HttpResponse('Check the chat model id', {
+                status: 400,
+                headers: { 'Content-Type': 'text/plan' },
+            });
+        }
+
         chatData.push({
             chat_model_id: chat_model_id,
-            chat_model_name:
-                chatModels.find(({ chat_model_id: modelId }) => chat_model_id === modelId)?.chat_model_name || '',
+            chat_model_name: chatModelName,
             chat_id: uuidv4(),
             dialogues: [],
         });

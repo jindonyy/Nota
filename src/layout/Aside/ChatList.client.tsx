@@ -6,10 +6,10 @@ import { useGetChats } from '@/app/[chat_id]/_apis';
 import ChatItem from '@/layout/Aside/ChatItem';
 
 export default function ChatList() {
+    const params = useParams<{ chat_id: string }>();
     const {
         data: { data },
     } = useGetChats();
-    const params = useParams<{ chat_id: string }>();
 
     return data.map((chat) => <ChatItem key={chat.chat_id} data={chat} active={params.chat_id === chat.chat_id} />);
 }

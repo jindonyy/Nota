@@ -2,19 +2,24 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
 import './PromptInput.scss';
 
-import { usePostChat } from '@/app/[chat_id]/_apis';
+import { usePostDialogue } from '@/app/[chat_id]/_apis';
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/shadcn/form';
 import { Textarea } from '@/components/shadcn/textarea';
 import { queryKeys } from '@/constants/queryKeys';
+import { usePostChat } from '@/apis';
+import { useToast } from '@/hooks/useToast';
+import { useRouter } from 'next/navigation';
+import { useURLSearchParams } from '@/hooks/useURLSearchParams';
+import { HttpError } from '@/modules/HttpError';
 
 const FormSchema = z.object({
     prompt: z.string().min(1),
@@ -22,25 +27,78 @@ const FormSchema = z.object({
 
 export function PromptInput() {
     const params = useParams<{ chat_id: string }>();
-    const searchParams = useSearchParams();
+    const searchParams = useURLSearchParams();
+    const router = useRouter();
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
     const queryClient = useQueryClient();
-    const { mutate, isSuccess } = usePostChat(params.chat_id);
-    const currentModel = searchParams.get('model');
+    const { mutateAsync: mutateAsyncChat } = usePostChat();
+    const { mutateAsync: mutateAsyncDialogue, isSuccess } = usePostDialogue();
+    const { toast } = useToast();
+    const currentModelId = searchParams.get('model');
+    const hasCurrentModel = !!currentModelId;
+    const hasPromptValue = prompt.length > 0;
+    const isNewChatPage = !params.chat_id;
 
-    const onSubmit = (data: z.infer<typeof FormSchema>) => {
-        mutate(
-            { prompt: data.prompt },
-            {
-                onSuccess: async () => {
-                    await queryClient.invalidateQueries({ queryKey: [queryKeys.getChat] });
-                    form.setValue('prompt', '');
-                },
-            },
-        );
+    const createChat = async (chatModelId: string) => {
+        try {
+            const data = await mutateAsyncChat({ chatModelId });
+            const newChat = data.data[data.data.length - 1];
+
+            if (!newChat?.chat_id) {
+                throw new HttpError(500);
+            }
+
+            router.push(`/${newChat.chat_id}?${searchParams.toString()}`);
+
+            return newChat;
+        } catch (error) {
+            if (error instanceof HttpError) {
+                toast({
+                    variant: 'destructive',
+                    title: '채팅 생성에 실패했습니다. 다시 시도해주세요.',
+                    description: `${error.status}: ${error.message}`,
+                    dir: 'center',
+                    duration: 3000,
+                });
+            }
+            throw Error;
+        }
+    };
+
+    const createDialogue = async (chatId: string, prompt: string) => {
+        try {
+            await mutateAsyncDialogue({ chatId, prompt });
+        } catch (error) {
+            if (error instanceof HttpError) {
+                toast({
+                    variant: 'destructive',
+                    title: '대화 생성에 실패했습니다. 다시 시도해주세요.',
+                    description: `${error.status}: ${error.message}`,
+                    dir: 'center',
+                    duration: 3000,
+                });
+            }
+            throw Error();
+        } finally {
+            if (isNewChatPage) {
+                queryClient.invalidateQueries({ queryKey: [queryKeys.getChats] });
+            }
+            console.log([queryKeys.getChat, chatId]);
+            queryClient.invalidateQueries({ queryKey: [queryKeys.getChat, chatId] });
+        }
+    };
+
+    const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+        if (isNewChatPage && currentModelId) {
+            const newChat = await createChat(currentModelId);
+            createDialogue(newChat.chat_id, data.prompt);
+        } else {
+            createDialogue(params.chat_id, data.prompt);
+        }
+        form.setValue('prompt', '');
     };
 
     useEffect(() => {
@@ -52,7 +110,7 @@ export function PromptInput() {
 
     useEffect(() => {
         form.setValue('prompt', '');
-    }, [searchParams]);
+    }, [currentModelId, isNewChatPage]);
 
     return (
         <Form {...form}>
@@ -64,8 +122,8 @@ export function PromptInput() {
                         <FormItem className="prompt-input-content">
                             <FormControl>
                                 <Textarea
-                                    disabled={!currentModel}
-                                    placeholder={currentModel ? '무엇이든 물어보세요' : '대화할 모델을 선택해주세요'}
+                                    disabled={!hasCurrentModel}
+                                    placeholder={hasCurrentModel ? '무엇이든 물어보세요' : '대화할 모델을 선택해주세요'}
                                     className="prompt-input-textarea resize-none"
                                     {...field}
                                 />
@@ -75,9 +133,9 @@ export function PromptInput() {
                                 type="submit"
                                 size="icon"
                                 variant="ghost"
-                                disabled={prompt.length < 1}
+                                disabled={!hasPromptValue}
                             >
-                                <NotaIcon variant="send" />
+                                <NotaIcon variant="send" size="lg" />
                             </Button>
                         </FormItem>
                     )}

@@ -9,6 +9,7 @@ import { clientFetch } from '@/modules';
 import type { HttpError } from '@/modules/HttpError';
 import type { Data } from '@/types/data';
 
+// 채팅 목록 조회
 export type GetChatsResponse = Data<Chat[]>;
 
 export const useGetChats = (
@@ -23,6 +24,7 @@ export const useGetChats = (
     return result;
 };
 
+// 단일 채팅 조회
 export type GetChatResponse = Data<Chat>;
 
 export const useGetChat = (
@@ -37,18 +39,19 @@ export const useGetChat = (
 
     return result;
 };
-export type PostDialoguesRequest = { prompt: string };
+
+// 대화 생성
+export type PostDialoguesRequest = { chatId: string; prompt: string };
 export type PostDialoguesResponse = Data<Chat>;
 
-export const usePostChat = (
-    chatId: string,
+export const usePostDialogue = (
     options?: UseMutationOptions<PostDialoguesResponse, HttpError, PostDialoguesRequest, unknown>,
 ) => {
     const result = useMutation({
-        mutationFn: (request: PostDialoguesRequest) =>
+        mutationFn: ({ chatId, prompt }: PostDialoguesRequest) =>
             clientFetch<PostDialoguesResponse>(`/chats/${chatId}/dialogues`, {
                 method: 'POST',
-                body: JSON.stringify(request),
+                body: JSON.stringify({ prompt }),
             }),
         gcTime: 0,
         ...options,

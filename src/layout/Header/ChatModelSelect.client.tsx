@@ -22,7 +22,7 @@ export default function ChatModelSelect(props: Props) {
     const router = useRouter();
     const options = getTransformSelectOption(data, 'chat_model_name', 'chat_model_id');
     const defaultChatModel = data[0];
-    const currentModel = searchParams.get('model') ?? defaultChatModel?.chat_model_id;
+    const currentModelId = searchParams.get('model') ?? defaultChatModel?.chat_model_id;
     const isNewChatPage = !params.chat_id;
 
     const handleSelect = (value: string) => {
@@ -48,8 +48,8 @@ export default function ChatModelSelect(props: Props) {
             <NotaSelect
                 onValueChange={handleSelect}
                 options={options}
-                defaultValue={currentModel}
-                value={currentModel}
+                defaultValue={currentModelId}
+                value={currentModelId}
                 placeholder="모델을 선택해주세요"
             />
         </div>
