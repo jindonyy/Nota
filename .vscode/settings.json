@@ -17,5 +17,5 @@
         "source.fixAll.eslint": "explicit",
         "source.fixAll.stylelint": "explicit"
     },
-    "cSpell.words": ["stylelint", "shadcn", "tailwindcss", "tanstack", "zustand"]
+    "cSpell.words": ["stylelint", "shadcn", "tailwindcss", "tanstack", "zustand", "webp"]
 }
