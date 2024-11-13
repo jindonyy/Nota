@@ -4,6 +4,7 @@ import localFont from 'next/font/local';
 
 import RootLayout from '@/layout/RootLayout';
 import Providers from '@/providers';
+import { Toaster } from '@/components/shadcn/toaster';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
@@ -27,6 +28,7 @@ export default function Layout({
                 <Providers>
                     <RootLayout>{children}</RootLayout>
                 </Providers>
+                <Toaster />
             </body>
         </html>
     );
