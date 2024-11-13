@@ -15,7 +15,7 @@ import { Button } from '@/components/shadcn/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/shadcn/form';
 import { Textarea } from '@/components/shadcn/textarea';
 import { queryKeys } from '@/constants/queryKeys';
-import { usePostChat } from '@/apis';
+import { usePostChat } from '@/layout/_apis';
 import { useToast } from '@/hooks/useToast';
 import { useRouter } from 'next/navigation';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
