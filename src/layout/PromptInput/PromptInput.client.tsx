@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { useParams, usePathname } from 'next/navigation';
-import { KeyboardEventHandler, useEffect } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -36,21 +36,16 @@ export function PromptInput() {
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
     const updatePromptValue = useChatStore(({ updatePromptValue }) => updatePromptValue);
-    const resetPromptValue = useChatStore(({ resetPromptValue }) => resetPromptValue);
+    const isNewChatFetching = useChatStore(({ isNewChatFetching }) => isNewChatFetching);
+    const startNewChatFetching = useChatStore(({ startNewChatFetching }) => startNewChatFetching);
+    const endNewChatFetching = useChatStore(({ endNewChatFetching }) => endNewChatFetching);
     const queryClient = useQueryClient();
     const { mutateAsync: mutateAsyncChat } = usePostChat();
-    const { mutateAsync: mutateAsyncDialogue, isSuccess } = usePostDialogue();
+    const { mutateAsync: mutateAsyncDialogue } = usePostDialogue();
     const { toast } = useToast();
     const currentModelId = searchParams.get('model');
     const isNewChatPage = !params.chat_id;
     const isNewChatLoadingPage = pathname.split('?')[0] === '/new';
-
-    const scrollToBottom = () => {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth',
-        });
-    };
 
     const createChat = async (chatModelId: string) => {
         try {
@@ -100,6 +95,7 @@ export function PromptInput() {
 
     const handleSubmit: SubmitHandler<{ prompt: string }> = async (data) => {
         updatePromptValue(data.prompt);
+        startNewChatFetching();
         form.setValue('prompt', '');
 
         if (isNewChatPage && currentModelId) {
@@ -112,7 +108,7 @@ export function PromptInput() {
             await createDialogue(params.chat_id, data.prompt);
         }
 
-        scrollToBottom();
+        endNewChatFetching();
     };
 
     useEffect(() => {
@@ -146,7 +142,7 @@ export function PromptInput() {
                                 type="submit"
                                 size="icon"
                                 variant="ghost"
-                                disabled={!prompt.length || isNewChatLoadingPage}
+                                disabled={!prompt.length || isNewChatLoadingPage || isNewChatFetching}
                             >
                                 <NotaIcon variant="send" size="lg" />
                             </Button>

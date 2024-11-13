@@ -2,6 +2,9 @@
 @use '@/styles/mixins.module';
 
 .chat-dialogue-list-skeleton {
+    @include mixins.flex(flex-start, stretch, column, 30px);
+
+    width: 100%;
     max-width: var.$chat-list-max-width;
     margin: 0 auto;
 }
