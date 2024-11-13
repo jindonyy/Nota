@@ -4,14 +4,17 @@ import NewDialogueListSkeleton from '@/app/new/_components/NewDialogueListSkelet
 import { useChatStore } from '@/stores/chat';
 import { useRouter } from 'next/navigation';
 import { useLayoutEffect } from 'react';
+import { useURLSearchParams } from '@/hooks/useURLSearchParams';
 import './page.scss';
 
 export default function NewPage() {
+    const searchParams = useURLSearchParams();
     const router = useRouter();
     const promptValue = useChatStore(({ promptValue }) => promptValue);
+    const isNewChatFetching = searchParams.get('referrer') === 'new' && !!promptValue;
 
     useLayoutEffect(() => {
-        if (!promptValue) {
+        if (!isNewChatFetching) {
             router.replace('/');
         }
     }, []);
