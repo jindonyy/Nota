@@ -36,9 +36,9 @@ export function PromptInput() {
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
     const updatePromptValue = useChatStore(({ updatePromptValue }) => updatePromptValue);
-    const isNewChatFetching = useChatStore(({ isNewChatFetching }) => isNewChatFetching);
-    const startNewChatFetching = useChatStore(({ startNewChatFetching }) => startNewChatFetching);
-    const endNewChatFetching = useChatStore(({ endNewChatFetching }) => endNewChatFetching);
+    const isNewDialogueFetching = useChatStore(({ isNewDialogueFetching }) => isNewDialogueFetching);
+    const startNewDialogueFetching = useChatStore(({ startNewDialogueFetching }) => startNewDialogueFetching);
+    const endNewDialogueFetching = useChatStore(({ endNewDialogueFetching }) => endNewDialogueFetching);
     const queryClient = useQueryClient();
     const { mutateAsync: mutateAsyncChat } = usePostChat();
     const { mutateAsync: mutateAsyncDialogue } = usePostDialogue();
@@ -79,6 +79,7 @@ export function PromptInput() {
                         await queryClient.invalidateQueries({ queryKey: [queryKeys.getChats] });
                     } else {
                         await queryClient.invalidateQueries({ queryKey: [queryKeys.getChat, chatId] });
+                        endNewDialogueFetching();
                     }
                 },
                 onError: (error) => {
@@ -95,20 +96,20 @@ export function PromptInput() {
 
     const handleSubmit: SubmitHandler<{ prompt: string }> = async (data) => {
         updatePromptValue(data.prompt);
-        startNewChatFetching();
         form.setValue('prompt', '');
 
-        if (isNewChatPage && currentModelId) {
-            searchParams.set('referrer', 'new');
-            router.push(`/new?${searchParams.toString()}`);
-            const newChat = await createChat(currentModelId);
-            await createDialogue(newChat.chat_id, data.prompt);
-            router.replace(`/${newChat.chat_id}?${searchParams.toString()}`);
+        if (isNewChatPage) {
+            if (currentModelId) {
+                searchParams.set('referrer', 'new');
+                router.push(`/new?${searchParams.toString()}`);
+                const newChat = await createChat(currentModelId);
+                await createDialogue(newChat.chat_id, data.prompt);
+                router.replace(`/${newChat.chat_id}?${searchParams.toString()}`);
+            }
         } else {
+            startNewDialogueFetching();
             await createDialogue(params.chat_id, data.prompt);
         }
-
-        endNewChatFetching();
     };
 
     useEffect(() => {
@@ -142,7 +143,7 @@ export function PromptInput() {
                                 type="submit"
                                 size="icon"
                                 variant="ghost"
-                                disabled={!prompt.length || isNewChatLoadingPage || isNewChatFetching}
+                                disabled={!prompt.length || isNewChatLoadingPage || isNewDialogueFetching}
                             >
                                 <NotaIcon variant="send" size="lg" />
                             </Button>

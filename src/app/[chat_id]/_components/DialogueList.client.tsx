@@ -12,7 +12,7 @@ import NewDialogueListSkeleton from '@/app/new/_components/NewDialogueListSkelet
 
 export default function DialogueList() {
     const params = useParams<{ chat_id: string }>();
-    const isNewChatFetching = useChatStore(({ isNewChatFetching }) => isNewChatFetching);
+    const isNewDialogueFetching = useChatStore(({ isNewDialogueFetching }) => isNewDialogueFetching);
     const {
         data: { data },
     } = useGetChat(params.chat_id);
@@ -22,12 +22,12 @@ export default function DialogueList() {
             top: document.body.scrollHeight,
             behavior: 'smooth',
         });
-    }, [data, isNewChatFetching]);
+    }, [data, isNewDialogueFetching]);
 
     return (
         <div className="chat-dialogue-list">
             {data?.dialogues.map((dialogue) => <DialogueItem key={dialogue.dialogue_id} data={dialogue} />)}
-            {isNewChatFetching && <NewDialogueListSkeleton />}
+            {isNewDialogueFetching && <NewDialogueListSkeleton />}
         </div>
     );
 }
