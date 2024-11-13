@@ -45,6 +45,13 @@ export function PromptInput() {
     const isNewChatPage = !params.chat_id;
     const isNewChatLoadingPage = pathname.split('?')[0] === '/new';
 
+    const scrollToBottom = () => {
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth',
+        });
+    };
+
     const createChat = async (chatModelId: string) => {
         try {
             const data = await mutateAsyncChat({ chatModelId });
@@ -61,7 +68,6 @@ export function PromptInput() {
                     variant: 'destructive',
                     title: '채팅 생성에 실패했습니다. 다시 시도해주세요.',
                     description: `${error.status}: ${error.message}`,
-                    dir: 'center',
                     duration: 3000,
                 });
             }
@@ -85,7 +91,6 @@ export function PromptInput() {
                         variant: 'destructive',
                         title: '대화 생성에 실패했습니다. 다시 시도해주세요.',
                         description: `${error.status}: ${error.message}`,
-                        dir: 'center',
                         duration: 3000,
                     });
                 },
@@ -104,16 +109,11 @@ export function PromptInput() {
             await createDialogue(newChat.chat_id, data.prompt);
             router.replace(`/${newChat.chat_id}?${searchParams.toString()}`);
         } else {
-            createDialogue(params.chat_id, data.prompt);
+            await createDialogue(params.chat_id, data.prompt);
         }
-    };
 
-    useEffect(() => {
-        window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: 'smooth',
-        });
-    }, [isSuccess]);
+        scrollToBottom();
+    };
 
     useEffect(() => {
         form.setValue('prompt', '');
