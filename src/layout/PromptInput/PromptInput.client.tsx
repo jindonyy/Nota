@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { KeyboardEventHandler, useEffect } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
@@ -28,6 +28,7 @@ const FormSchema = z.object({
 
 export function PromptInput() {
     const params = useParams<{ chat_id: string }>();
+    const pathname = usePathname();
     const searchParams = useURLSearchParams();
     const router = useRouter();
     const form = useForm<z.infer<typeof FormSchema>>({
@@ -38,10 +39,11 @@ export function PromptInput() {
     const resetPromptValue = useChatStore(({ resetPromptValue }) => resetPromptValue);
     const queryClient = useQueryClient();
     const { mutateAsync: mutateAsyncChat } = usePostChat();
-    const { mutate: mutateDialogue, isSuccess } = usePostDialogue();
+    const { mutateAsync: mutateAsyncDialogue, isSuccess } = usePostDialogue();
     const { toast } = useToast();
     const currentModelId = searchParams.get('model');
     const isNewChatPage = !params.chat_id;
+    const isNewChatLoadingPage = pathname.split('?')[0] === '/new';
 
     const createChat = async (chatModelId: string) => {
         try {
@@ -67,18 +69,16 @@ export function PromptInput() {
         }
     };
 
-    const createDialogue = (chatId: string, prompt: string) => {
-        mutateDialogue(
+    const createDialogue = async (chatId: string, prompt: string) => {
+        await mutateAsyncDialogue(
             { chatId, prompt },
             {
                 onSuccess: async () => {
                     if (isNewChatPage) {
                         await queryClient.invalidateQueries({ queryKey: [queryKeys.getChats] });
-                        router.replace(`/${chatId}?${searchParams.toString()}`);
                     } else {
                         await queryClient.invalidateQueries({ queryKey: [queryKeys.getChat, chatId] });
                     }
-                    resetPromptValue();
                 },
                 onError: (error) => {
                     toast({
@@ -95,16 +95,17 @@ export function PromptInput() {
 
     const handleSubmit: SubmitHandler<{ prompt: string }> = async (data) => {
         updatePromptValue(data.prompt);
+        form.setValue('prompt', '');
 
         if (isNewChatPage && currentModelId) {
             searchParams.set('referrer', 'new');
             router.push(`/new?${searchParams.toString()}`);
             const newChat = await createChat(currentModelId);
-            createDialogue(newChat.chat_id, data.prompt);
+            await createDialogue(newChat.chat_id, data.prompt);
+            router.replace(`/${newChat.chat_id}?${searchParams.toString()}`);
         } else {
             createDialogue(params.chat_id, data.prompt);
         }
-        form.setValue('prompt', '');
     };
 
     useEffect(() => {
@@ -116,7 +117,13 @@ export function PromptInput() {
 
     useEffect(() => {
         form.setValue('prompt', '');
-    }, [currentModelId, isNewChatPage]);
+    }, [currentModelId]);
+
+    useEffect(() => {
+        if (isNewChatPage) {
+            form.setValue('prompt', '');
+        }
+    }, [isNewChatPage]);
 
     return (
         <Form {...form}>
@@ -139,7 +146,7 @@ export function PromptInput() {
                                 type="submit"
                                 size="icon"
                                 variant="ghost"
-                                disabled={!prompt.length}
+                                disabled={!prompt.length || isNewChatLoadingPage}
                             >
                                 <NotaIcon variant="send" size="lg" />
                             </Button>

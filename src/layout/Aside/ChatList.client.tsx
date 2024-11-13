@@ -12,10 +12,6 @@ export default function ChatList() {
         data: { data },
     } = useGetChats();
 
-    useEffect(() => {
-        console.log(data);
-    }, [data]);
-
     return [...data]
         .reverse()
         .map((chat) => <ChatItem key={chat.chat_id} data={chat} active={params.chat_id === chat.chat_id} />);
