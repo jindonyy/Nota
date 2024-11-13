@@ -11,5 +11,7 @@ export default function ChatList() {
         data: { data },
     } = useGetChats();
 
-    return data.map((chat) => <ChatItem key={chat.chat_id} data={chat} active={params.chat_id === chat.chat_id} />);
+    return [...data]
+        .reverse()
+        .map((chat) => <ChatItem key={chat.chat_id} data={chat} active={params.chat_id === chat.chat_id} />);
 }
