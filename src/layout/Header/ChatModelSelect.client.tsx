@@ -5,7 +5,7 @@ import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigat
 import NotaSelect from '@/components/NotaSelect';
 import type { ChatModels } from '@/models';
 import { getTransformSelectOption } from '@/utils/form';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
 interface Props {
     data: ChatModels;
@@ -18,9 +18,9 @@ export default function ChatModelSelect(props: Props) {
     const pathname = usePathname();
     const params = useParams<{ chat_id: string }>();
     const searchParams = useSearchParams();
-    const newSearchParams = new URLSearchParams(searchParams.toString());
     const router = useRouter();
     const options = getTransformSelectOption(data, 'chat_model_name', 'chat_model_id');
+    const newSearchParams = new URLSearchParams(searchParams.toString());
     const defaultChatModelId = data[0]?.chat_model_id;
     const currentModelId = searchParams.get('model');
     const isNewChatPage = !params.chat_id;
@@ -37,7 +37,9 @@ export default function ChatModelSelect(props: Props) {
     };
 
     useEffect(() => {
-        if (!currentModelId && defaultChatModelId) {
+        const isInvalidChatModelId = !currentModelId || !data.some((model) => model.chat_model_id === currentModelId);
+
+        if (isInvalidChatModelId && defaultChatModelId) {
             newSearchParams.set('model', defaultChatModelId);
             router.replace(`${pathname}?${newSearchParams.toString()}`);
         }
