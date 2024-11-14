@@ -2,8 +2,10 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useParams, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 
 import './PromptInput.scss';
@@ -12,10 +14,9 @@ import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/shadcn/form';
 import { Textarea } from '@/components/shadcn/textarea';
-import { useRouter } from 'next/navigation';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
-import { useChatStore } from '@/stores/chat';
 import { useCreateChat, useCreateDialogue } from '@/layout/_services';
+import { useChatStore } from '@/stores/chat';
 
 const FormSchema = z.object({
     prompt: z.string().min(1),

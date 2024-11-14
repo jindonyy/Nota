@@ -18,9 +18,9 @@ export default function ErrorPage({ error, reset }: { error: Error & { digest?: 
         <div className="shop">
             <div className="error-page">
                 <p className="error-page-text">
-                    로드 중 오류
+                    {'로드 중 오류'}
                     <br />
-                    다시 시도해주세요.
+                    {'다시 시도해주세요.'}
                 </p>
                 <Button onClick={handleReload} size="lg">
                     <div>{'새로고침'}</div>

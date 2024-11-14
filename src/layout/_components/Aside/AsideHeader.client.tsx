@@ -1,9 +1,10 @@
 'use client';
 
+import Link from 'next/link';
+
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
-import Link from 'next/link';
 
 export default function AsideHeader() {
     const searchParams = useURLSearchParams();

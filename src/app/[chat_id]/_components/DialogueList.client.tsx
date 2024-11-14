@@ -7,9 +7,9 @@ import { useGetChat } from '@/app/[chat_id]/_apis';
 import DialogueItem from '@/app/[chat_id]/_components/DialogueItem';
 
 import './DialogueList.scss';
-import { useChatStore } from '@/stores/chat';
 import NewDialogueListSkeleton from '@/app/new/_components/NewDialogueListSkeleton.client';
 import { useToast } from '@/hooks/useToast';
+import { useChatStore } from '@/stores/chat';
 
 export default function DialogueList() {
     const params = useParams<{ chat_id: string }>();
@@ -18,7 +18,6 @@ export default function DialogueList() {
     const isNewDialogueFetching = useChatStore(({ isNewDialogueFetching }) => isNewDialogueFetching);
     const {
         data: { data },
-        error,
     } = useGetChat(params.chat_id);
 
     useEffect(() => {
@@ -27,17 +26,6 @@ export default function DialogueList() {
             behavior: 'smooth',
         });
     }, [data, isNewDialogueFetching]);
-
-    useEffect(() => {
-        if (error?.status === 400) {
-            toast({
-                variant: 'destructive',
-                title: '존재하지 않는 재팅입니다.',
-                duration: 3000,
-            });
-            router.replace('/');
-        }
-    }, [error]);
 
     return (
         <div className="chat-dialogue-list">

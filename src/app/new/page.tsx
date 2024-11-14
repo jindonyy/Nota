@@ -1,10 +1,11 @@
 'use client';
 
-import NewDialogueListSkeleton from '@/app/new/_components/NewDialogueListSkeleton.client';
-import { useChatStore } from '@/stores/chat';
 import { useRouter } from 'next/navigation';
 import { useLayoutEffect } from 'react';
+
+import NewDialogueListSkeleton from '@/app/new/_components/NewDialogueListSkeleton.client';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
+import { useChatStore } from '@/stores/chat';
 import './page.scss';
 
 export const dynamic = 'force-static';

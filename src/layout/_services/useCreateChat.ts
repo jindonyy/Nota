@@ -1,11 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 import { useToast } from '@/hooks/useToast';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
 import { usePostChat } from '@/layout/_apis';
 import { HttpError } from '@/modules/HttpError';
-import { useChatStore } from '@/stores/chat';
-import { useRouter } from 'next/navigation';
 
 export const useCreateChat = () => {
     const searchParams = useURLSearchParams();

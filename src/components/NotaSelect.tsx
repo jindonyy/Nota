@@ -1,3 +1,5 @@
+import type { ComponentProps } from 'react';
+
 import {
     Select,
     SelectContent,
@@ -7,7 +9,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/shadcn/select';
-import { ComponentProps } from 'react';
 
 interface Props extends ComponentProps<typeof Select> {
     options: (string | { label: string; value: string })[];

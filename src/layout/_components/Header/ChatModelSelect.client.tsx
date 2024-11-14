@@ -1,11 +1,11 @@
 'use client';
 
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
 
 import NotaSelect from '@/components/NotaSelect';
 import type { ChatModels } from '@/layout/_models';
 import { getTransformSelectOption } from '@/utils/form';
-import { useEffect } from 'react';
 
 interface Props {
     data: ChatModels;

@@ -1,9 +1,9 @@
 'use client';
 
 import Message from '@/components/Message';
+import NotaAvatar from '@/components/NotaAvatar';
 import { Skeleton } from '@/components/shadcn/skeleton';
 import { useChatStore } from '@/stores/chat';
-import NotaAvatar from '@/components/NotaAvatar';
 import './NewDialogueListSkeleton.scss';
 
 export default function NewDialogueListSkeleton() {

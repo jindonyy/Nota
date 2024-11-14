@@ -1,9 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { useToast } from '@/hooks/useToast';
-import { useEffect } from 'react';
 
 export default function ErrorComponent({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
     const { toast } = useToast();

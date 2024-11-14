@@ -1,10 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { useToast } from '@/hooks/useToast';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 export default function ErrorComponent({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
     const router = useRouter();

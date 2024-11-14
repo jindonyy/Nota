@@ -2,9 +2,9 @@ import '@/styles/globals.scss';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
+import { Toaster } from '@/components/shadcn/toaster';
 import RootLayout from '@/layout/RootLayout';
 import Providers from '@/providers';
-import { Toaster } from '@/components/shadcn/toaster';
 
 const geistSans = localFont({
     src: './fonts/GeistVF.woff',
