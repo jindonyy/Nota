@@ -16,7 +16,7 @@ export default function Message(props: Props) {
     return (
         <div className={`message flex gap-3 ${profilePosition === 'left' ? 'flex-row' : 'flex-row-reverse'}`}>
             {hasProfile && <NotaAvatar imageUrl={profileImageUrl} fallback={profileFallback} />}
-            <p className="px-3 py-2.5 rounded-sm bg-[var(--gray-750)] tracking-wide">{text}</p>
+            <pre className="px-3 py-2.5 rounded-sm bg-[var(--gray-750)] tracking-wide leading-6">{text}</pre>
         </div>
     );
 }
