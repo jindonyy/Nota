@@ -1,7 +1,6 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { useParams, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm, useWatch } from 'react-hook-form';
@@ -9,18 +8,14 @@ import { z } from 'zod';
 
 import './PromptInput.scss';
 
-import { usePostDialogue } from '@/app/[chat_id]/_apis';
 import NotaIcon from '@/components/NotaIcon';
 import { Button } from '@/components/shadcn/button';
 import { Form, FormControl, FormField, FormItem } from '@/components/shadcn/form';
 import { Textarea } from '@/components/shadcn/textarea';
-import { queryKeys } from '@/constants/queryKeys';
-import { usePostChat } from '@/layout/_apis';
-import { useToast } from '@/hooks/useToast';
 import { useRouter } from 'next/navigation';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
-import { HttpError } from '@/modules/HttpError';
 import { useChatStore } from '@/stores/chat';
+import { useCreateChat, useCreateDialogue } from '@/layout/_services';
 
 const FormSchema = z.object({
     prompt: z.string().min(1),
@@ -35,92 +30,30 @@ export function PromptInput() {
         resolver: zodResolver(FormSchema),
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
-    const updatePromptValue = useChatStore(({ updatePromptValue }) => updatePromptValue);
     const isNewDialogueFetching = useChatStore(({ isNewDialogueFetching }) => isNewDialogueFetching);
-    const startNewDialogueFetching = useChatStore(({ startNewDialogueFetching }) => startNewDialogueFetching);
-    const endNewDialogueFetching = useChatStore(({ endNewDialogueFetching }) => endNewDialogueFetching);
-    const queryClient = useQueryClient();
-    const { mutateAsync: mutateAsyncChat } = usePostChat();
-    const { mutateAsync: mutateAsyncDialogue } = usePostDialogue();
-    const { toast } = useToast();
     const currentModelId = searchParams.get('model');
+    const { createChat } = useCreateChat();
+    const { createDialogue } = useCreateDialogue();
     const isNewChatPage = !params.chat_id;
     const isNewChatLoadingPage = pathname.split('?')[0] === '/new';
 
-    const createChat = async (chatModelId: string) => {
-        try {
-            const data = await mutateAsyncChat({ chatModelId });
-            const newChat = data.data[data.data.length - 1];
-
-            if (!newChat) {
-                throw new HttpError(500);
-            }
-
-            return newChat;
-        } catch (error) {
-            if (error instanceof HttpError) {
-                toast({
-                    variant: 'destructive',
-                    title: '채팅 생성에 실패했습니다. 다시 시도해주세요.',
-                    description: `${error.status}: ${error.message}`,
-                    duration: 3000,
-                });
-            }
-            throw Error();
-        }
-    };
-
-    const createDialogue = async (chatId: string, prompt: string) => {
-        await mutateAsyncDialogue(
-            { chatId, prompt },
-            {
-                onSuccess: async () => {
-                    if (isNewChatPage) {
-                        await queryClient.invalidateQueries({ queryKey: [queryKeys.getChats] });
-                    } else {
-                        await queryClient.invalidateQueries({ queryKey: [queryKeys.getChat, chatId] });
-                        endNewDialogueFetching();
-                    }
-                },
-                onError: (error) => {
-                    toast({
-                        variant: 'destructive',
-                        title: '대화 생성에 실패했습니다. 다시 시도해주세요.',
-                        description: `${error.status}: ${error.message}`,
-                        duration: 3000,
-                    });
-                },
-            },
-        );
-    };
-
     const handleSubmit: SubmitHandler<{ prompt: string }> = async (data) => {
-        updatePromptValue(data.prompt);
         form.setValue('prompt', '');
 
         if (isNewChatPage) {
-            if (currentModelId) {
-                searchParams.set('referrer', 'new');
-                router.push(`/new?${searchParams.toString()}`);
-                const newChat = await createChat(currentModelId);
-                await createDialogue(newChat.chat_id, data.prompt);
-                router.replace(`/${newChat.chat_id}?${searchParams.toString()}`);
-            }
+            if (!currentModelId) return;
+
+            const newChat = await createChat(currentModelId, data.prompt);
+            await createDialogue(newChat.chat_id, data.prompt);
+            router.replace(`/${newChat.chat_id}?model=${currentModelId}&referrer=new`);
         } else {
-            startNewDialogueFetching();
             await createDialogue(params.chat_id, data.prompt);
         }
     };
 
     useEffect(() => {
         form.setValue('prompt', '');
-    }, [currentModelId]);
-
-    useEffect(() => {
-        if (isNewChatPage) {
-            form.setValue('prompt', '');
-        }
-    }, [isNewChatPage]);
+    }, [currentModelId, params.chat_id]);
 
     return (
         <Form {...form}>

@@ -43,7 +43,7 @@ export default function ChatModelSelect(props: Props) {
             newSearchParams.set('model', defaultChatModelId);
             router.replace(`${pathname}?${newSearchParams.toString()}`);
         }
-    }, [currentModelId]);
+    }, [currentModelId, data]);
 
     return (
         <div className="header-chat-model-select">

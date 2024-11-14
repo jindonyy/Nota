@@ -9,7 +9,7 @@ import './DialogueList.scss';
 export default function DialogueListFallback() {
     const searchParams = useURLSearchParams();
     const promptValue = useChatStore(({ promptValue }) => promptValue);
-    const isNewDialogueFetching = searchParams.get('referrer') === 'new' && !!promptValue;
+    const isNewDialogueFetching = searchParams.get('referrer') === 'new';
 
     return isNewDialogueFetching ? <NewDialogueListSkeleton /> : <DialogueListSkeleton />;
 }
