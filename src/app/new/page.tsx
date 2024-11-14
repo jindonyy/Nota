@@ -7,6 +7,8 @@ import { useLayoutEffect } from 'react';
 import { useURLSearchParams } from '@/hooks/useURLSearchParams';
 import './page.scss';
 
+export const dynamic = 'force-static';
+
 export default function NewPage() {
     const searchParams = useURLSearchParams();
     const router = useRouter();
