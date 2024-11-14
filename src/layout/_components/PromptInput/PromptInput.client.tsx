@@ -31,6 +31,8 @@ export function PromptInput() {
     });
     const prompt = useWatch({ name: 'prompt', control: form.control }) ?? '';
     const isNewDialogueFetching = useChatStore(({ isNewDialogueFetching }) => isNewDialogueFetching);
+    const updatePromptValue = useChatStore(({ updatePromptValue }) => updatePromptValue);
+    const resetPromptValue = useChatStore(({ resetPromptValue }) => resetPromptValue);
     const currentModelId = searchParams.get('model');
     const { createChat } = useCreateChat();
     const { createDialogue } = useCreateDialogue();
@@ -38,6 +40,7 @@ export function PromptInput() {
     const isNewChatLoadingPage = pathname.split('?')[0] === '/new';
 
     const handleSubmit: SubmitHandler<{ prompt: string }> = async (data) => {
+        updatePromptValue(prompt);
         form.setValue('prompt', '');
 
         if (isNewChatPage) {
@@ -49,6 +52,9 @@ export function PromptInput() {
         } else {
             await createDialogue(params.chat_id, data.prompt);
         }
+
+        // router 후 초기화
+        setTimeout(resetPromptValue, 1000);
     };
 
     useEffect(() => {

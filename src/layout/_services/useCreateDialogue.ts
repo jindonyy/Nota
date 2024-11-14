@@ -13,7 +13,6 @@ export const useCreateDialogue = () => {
     const { toast } = useToast();
     const startNewDialogueFetching = useChatStore(({ startNewDialogueFetching }) => startNewDialogueFetching);
     const endNewDialogueFetching = useChatStore(({ endNewDialogueFetching }) => endNewDialogueFetching);
-    const updatePromptValue = useChatStore(({ updatePromptValue }) => updatePromptValue);
 
     const { mutateAsync: mutateAsyncDialogue } = usePostDialogue();
     const queryClient = useQueryClient();
@@ -43,7 +42,6 @@ export const useCreateDialogue = () => {
 
     const createDialogue = async (chatId: string, prompt: string) => {
         startNewDialogueFetching();
-        updatePromptValue(prompt);
 
         await postDialogue(chatId, prompt);
 

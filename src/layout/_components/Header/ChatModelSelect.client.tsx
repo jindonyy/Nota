@@ -16,24 +16,17 @@ export default function ChatModelSelect(props: Props) {
         data: { data },
     } = props;
     const pathname = usePathname();
-    const params = useParams<{ chat_id: string }>();
     const searchParams = useSearchParams();
     const router = useRouter();
     const options = getTransformSelectOption(data, 'chat_model_name', 'chat_model_id');
     const newSearchParams = new URLSearchParams(searchParams.toString());
     const defaultChatModelId = data[0]?.chat_model_id;
     const currentModelId = searchParams.get('model');
-    const isNewChatPage = !params.chat_id;
 
     const handleSelect = (value: string) => {
         newSearchParams.set('model', value);
         const newUrl = `/?${newSearchParams.toString()}`;
-
-        if (isNewChatPage) {
-            router.replace(newUrl);
-        } else {
-            router.push(newUrl);
-        }
+        router.push(newUrl);
     };
 
     useEffect(() => {

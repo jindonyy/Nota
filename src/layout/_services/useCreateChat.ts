@@ -11,7 +11,6 @@ export const useCreateChat = () => {
     const searchParams = useURLSearchParams();
     const router = useRouter();
     const { toast } = useToast();
-    const updatePromptValue = useChatStore(({ updatePromptValue }) => updatePromptValue);
     const { mutateAsync: mutateAsyncChat } = usePostChat();
 
     const postChat = async (chatModelId: string) => {
@@ -43,7 +42,6 @@ export const useCreateChat = () => {
     };
 
     const createChat = async (currentModelId: string, prompt: string) => {
-        updatePromptValue(prompt);
         routeNewLoadingPage();
 
         const newChat = await postChat(currentModelId);
