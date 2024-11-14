@@ -6,6 +6,7 @@ export default function Home() {
         <div className="home-page">
             <Image
                 className="home-logo"
+                priority
                 width="100"
                 height="100"
                 src="/static/images/nota_profile.webp"
