@@ -3,14 +3,18 @@ import './Aside.scss';
 import ChatList from '@/layout/_components/Aside/ChatList.client';
 import ChatListSkeleton from '@/layout/_components/Aside/ChatListSkeleton';
 import AsideHeader from '@/layout/_components/Aside/AsideHeader.client';
+import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
+import ErrorComponent from '@/layout/_components/Aside/ErrorComponent';
 
 export default function Aside() {
     return (
         <aside className="aside">
             <AsideHeader />
-            <Suspense fallback={<ChatListSkeleton />}>
-                <ChatList />
-            </Suspense>
+            <ErrorBoundary errorComponent={ErrorComponent}>
+                <Suspense fallback={<ChatListSkeleton />}>
+                    <ChatList />
+                </Suspense>
+            </ErrorBoundary>
         </aside>
     );
 }
