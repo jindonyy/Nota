@@ -52,3 +52,9 @@
     background-color: var(--gray-750);
     border-radius: calc(var(--radius) - 4px);
 }
+
+.chat-dialogue-list-error {
+    height: calc(100dvh - var.$header-height);
+    align-content: center;
+    text-align: center;
+}

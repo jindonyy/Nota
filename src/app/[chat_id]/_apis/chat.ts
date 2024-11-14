@@ -13,7 +13,7 @@ import type { Data } from '@/types/data';
 export type GetChatsResponse = Data<Chat[]>;
 
 export const useGetChats = (
-    options?: Omit<UseSuspenseQueryOptions<GetChatsResponse, Error, GetChatsResponse, string[]>, 'queryKey'>,
+    options?: Omit<UseSuspenseQueryOptions<GetChatsResponse, HttpError, GetChatsResponse, string[]>, 'queryKey'>,
 ) => {
     const result = useSuspenseQuery({
         queryKey: [queryKeys.getChats],
@@ -29,7 +29,7 @@ export type GetChatResponse = Data<Chat>;
 
 export const useGetChat = (
     chatId: string,
-    options?: Omit<UseSuspenseQueryOptions<GetChatResponse, Error, GetChatResponse, string[]>, 'queryKey'>,
+    options?: Omit<UseSuspenseQueryOptions<GetChatResponse, HttpError, GetChatResponse, string[]>, 'queryKey'>,
 ) => {
     const result = useSuspenseQuery({
         queryKey: [queryKeys.getChat, chatId],
