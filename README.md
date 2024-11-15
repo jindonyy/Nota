@@ -88,16 +88,20 @@ yarn dev
 suspense를 이용하여 서버에서 처음 HTML을 받을 시 각 컴포넌트에 로딩이 적용된 UI를 받는다. (FCP 감소)
 (ChatModelSelect, ChatList, DialogueList - Skeleton)
 
-![스크린샷 2024-11-14 오후 1 29 57](https://github.com/user-attachments/assets/288466b3-3b72-4a6b-91d9-19a9df7ee999)
 
-https://github.com/user-attachments/assets/22086cb0-7f17-4986-9adf-975b8187b5d3
+<img src="https://github.com/user-attachments/assets/32cb0c47-8bd1-4605-ae74-b6315e274f67" width="480" />
+<br><br>
+<img src="https://github.com/user-attachments/assets/b6f72db4-ce12-44df-8635-0985043c362c" width="480" />
+
+
 
 ### Error
 
 -   ErrorBoundary를 통해 error를 catch하여 retry 버튼을 제공하고, toast를 띄워 사용자에게 안내한다.<br>
     (ChatModelSelect, ChatList, DialogueList - ErrorComponent)
 
-https://github.com/user-attachments/assets/6f30d768-6a15-45be-b2a6-0e08fd1c8ff5
+<img src="https://github.com/user-attachments/assets/a776d2a4-e291-4794-a424-60bcb8950350" width="480" />
+
 
 ### 예외 처리
 
